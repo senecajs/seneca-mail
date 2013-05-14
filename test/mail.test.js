@@ -69,5 +69,4 @@ describe('mail', function() {
       })
   })
 
-  
 })
