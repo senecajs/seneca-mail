@@ -32,6 +32,6 @@
   "files": [
     "README.md",
     "LICENSE.txt",
-    "lib/perm.js"
+    "lib/mail.js"
   ]
 }
