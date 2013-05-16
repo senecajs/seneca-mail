@@ -1,10 +1,10 @@
 {
   "name": "seneca-mail",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Seneca email plugin",
   "main": "lib/mail.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node lib/mail.js"
   },
   "repository": {
     "type": "git",

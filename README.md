@@ -361,7 +361,7 @@ Copy sendconf.example.js and add real configuration values, and then send a mail
 
 ```sh
 cd test
-mocha sendmail.js --seneca.log.print
+node send-mail.js --seneca.log.print
 ```
 
 See the [nodemailer](http://www.nodemailer.com/) module for configuration options.
