@@ -294,7 +294,7 @@ As per action _role:mail, cmd:send_.
 
 
 
-### role:mail, hook:content
+### HOOK: role:mail, hook:content
 
 Modify or provide email content for template insertion
 
@@ -310,7 +310,7 @@ Object with content values.
 
 
 
-### role:mail, hook:init
+### HOOK: role:mail, hook:init
 
 Initialize plugin. Calls _role:mail, hook:init, sub:templates_ and
 _role:mail, hook:init, sub:transport_ in sequence.
@@ -325,7 +325,7 @@ _role:mail, hook:init, sub:transport_ in sequence.
 Nothing.
 
 
-### role:mail, hook:init, sub:templates
+### HOOK: role:mail, hook:init, sub:templates
 
 Initialize email templates.
 
@@ -339,7 +339,7 @@ Implementation dependent object.
 
 
 
-### role:mail, hook:init, sub:transport
+### HOOK: role:mail, hook:init, sub:transport
 
 Initialize email transport
 
@@ -361,7 +361,7 @@ cd test
 mocha mail.test.js --seneca.log.print
 ```
 
-Copy sendconf.example.js and add real configuration values, and then send a mail with:
+Copy _sendconf.example.js_ and add real configuration values, and then send a mail with:
 
 ```sh
 cd test
