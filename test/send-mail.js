@@ -15,5 +15,8 @@ seneca.ready(function(err){
   seneca.act({role:'mail',cmd:'send',code:sendconf.send.code,to:sendconf.send.to,content:{name:'Richard'}},function(err,out){
     console.dir(err)
     console.dir(out)
+
+    // nodemailer keeps connections open
+    seneca.close()
   })
 })

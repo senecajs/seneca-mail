@@ -24,7 +24,7 @@ customize plugins, without needing to learn complex APIs.
 
 This module can be used in a standalone fashion, but is most often
 used with the [seneca-user](http://github.com/rjrodger/seneca-user)
-plugin to handle transaction emails for user accounts, such as welcome
+plugin to handle transactional emails for user accounts, such as welcome
 mails and password reminders.
 
 
@@ -56,7 +56,7 @@ seneca.use('mail',{
   config:{
     service: "Gmail",
     auth: {
-      user: "admin@example.com",
+      user: "help@example.com",
       pass: "PASSWORD"
     }
   }
@@ -81,13 +81,13 @@ seneca.ready(function(err){
 
 The _role:mail, cmd:send_ action sends out an email. The _code_
 identifies the email template that you want to use. You can also just
-provide the email body directly by providing _html_ or _text_ argument
-containing an HTML or plaintext body string.
+provide the email body directly by providing _html_ or _text_ arguments
+containing an HTML or plain text body string.
 
 The tradition email fields are what you would expect:
 
    * _to_: to email address
-   * _from_: from email address - you can set this once in the plugin configuration, as per the example
+   * _from_: from email address - you can set this once (or any other fields) in the plugin configuration to avoid repetition, as per the example
    * _subject_: email subject line
 
 If you are using a template, the concrete values to insert into the template are taken from the properties of the _content_ argument.
@@ -100,10 +100,15 @@ _welcome/html.ejs_:
 Welcome to our service!
 ```
 
-This is the email template that generates the final text of the email that will be sent. You can use HTML to make your emails look nicer. You also use plain text by creating a _welcome/text.ejs_ version of the email template file.
+This is the email template that generates the final text of the email
+that will be sent. You can use HTML to make your emails look
+nicer. You also use plain text by creating a _welcome/text.ejs_
+version of the email template file. See the
+[email-templates](http://niftylettuce.github.io/node-email-templates/)
+module for more information.
 
 
-To run this example, install the _seneca-mail_ module as below, copy
+To run this example, install the _seneca-mail_ module as per the installation instructions below, copy
 the _test/readme.js_ file into your own project, update the
 configuration with real values, and run from the command line with
 
@@ -114,9 +119,8 @@ node readme.js
 
 ## Deeper example
 
-Take a look at the <a
-href="http://github.com/rjrodger/seneca-examples">user accounts
-example</a> to see how this module provides with transactional email
+Take a look at the <a href="http://github.com/rjrodger/seneca-examples">Seneca user accounts
+example</a> to see how this module provides transactional email
 for user account functionality.
 
 
@@ -145,22 +149,22 @@ To isolate logging output from the plugin, use:
 node your-app.js --seneca.log=plugin:mail
 ```
 
-For more logging options, see [Seneca logging tutorial](http://senecajs.org/logging-example.html).
-You may wish to log email activity to a separate file for audit purposes.
+For more logging options, see the [Seneca logging tutorial](http://senecajs.org/logging-example.html).
+You may, for example, wish to log email activity to a separate file for audit purposes.
 
 
 ## Options
 
    * _folder_: contains email template sub-folders, default: _'./email-templates'_. 
    * _content_: insertion values for all email templates (saves repetition), default: _{}_. 
-     * non-string sub-objects allow for email specific content (using email _code_ as property name), for example: {content:{welcome:{subject:'Howdy!'}}}
-   * _mail: fields for all emails, good place for a common from address, default: _{}_.
+     * non-string sub-objects allow for template-code-specific content (using email _code_ as property name), for example: _{content:{welcome:{subject:'Howdy!'}}}_.
+   * _mail: _to_, _from_, etc, fields for all emails, good place for a common _from_ address, default: _{}_.
    * _transport_: the _nodemailer_ transport, default: _'smtp'_.
    * _config_: the _nodemailer_ configuration, default: _{}_.
 
 If you are using a customer email template generator then the _folder_ option may not be needed.
 
-If you are using a different email module, the _transport_ and _config_ options may not be needed.
+If you are using a different email transport plugin, such as the PostmarkApp one, the _transport_ and _config_ options may not be needed.
 
 
 
@@ -169,7 +173,7 @@ If you are using a different email module, the _transport_ and _config_ options 
 All actions provide results via the standard callback format: <code>function(error,data){ ... }</code>.
 
 
-### role:mail, cmd:send
+### ACTION: role:mail, cmd:send
 
 Send an email. Arguments override default settings in the _mail_ plugin option.
 
@@ -178,11 +182,11 @@ Send an email. Arguments override default settings in the _mail_ plugin option.
    
    * _code_: template code, name of the sub-folder of the email templates folder
    * _content_: insertion values for the email template
-   * _html_ and/or _text_: literal body of the email, only used if there's no _code_ argument (_content_ is also ignored in this case)
+   * _html_ and/or _text_: literal body of the email, only used if there's no _code_ argument ( _content_ is also ignored in this case)
    * _to_: to email address, overrides _options.mail.to_ 
    * _from_: from email address, overrides _options.mail.from_ 
-   * _cc_: from email address, overrides _options.mail.cc_ 
-   * _bcc_: from email address, overrides _options.mail.bcc_ 
+   * _cc_: cc email address, overrides _options.mail.cc_ 
+   * _bcc_: bcc email address, overrides _options.mail.bcc_ 
    * _replyTo_: reply to email address, overrides _options.mail.replyTo_ 
    * _subject_: email subject line, overrides _options.mail.subject_ 
 
@@ -203,7 +207,7 @@ Object with properties:
 
 
 
-### role:mail, cmd:generate
+### ACTION: role:mail, cmd:generate
 
 Generate literal email HTML and plain text from a template.
 
@@ -262,7 +266,7 @@ For more on logging, see the [seneca logging example](http://senecajs.org/loggin
 
 
 
-### Customization
+## Customization
 
 As with all seneca plugins, you can customize behavior simply by overwriting actions.
 However, this plugin also provides customization hooks, which are sub actions called by the main _cmd_ actions.
