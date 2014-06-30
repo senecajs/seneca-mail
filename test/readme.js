@@ -1,6 +1,6 @@
 var seneca = require('seneca')()
 
-seneca.use('mail',{
+seneca.use('..',{
   folder: './email-templates',
   mail: {
    from: 'help@example.com'
