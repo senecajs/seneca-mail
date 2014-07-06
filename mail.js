@@ -1,4 +1,4 @@
-/* Copyright (c) 2013 Richard Rodger, MIT License */
+/* Copyright (c) 2013-2014 Richard Rodger, MIT License */
 "use strict";
 
 
@@ -8,7 +8,7 @@ var _              = require('underscore')
 var emailtemplates = require('email-templates')
 var nodemailer     = require("nodemailer")
 
-var name = "mail"
+
 
 
 
@@ -16,6 +16,7 @@ var name = "mail"
 
 module.exports = function( options ){
   var seneca = this
+  var plugin = "mail"
 
   options = this.util.deepextend({
     folder:    './email-templates',
@@ -28,10 +29,10 @@ module.exports = function( options ){
 
 
 
-  seneca.add({role:name,cmd:'generate'},function( args, done ){
+  seneca.add({role:plugin,cmd:'generate'},function( args, done ){
     var code     = args.code // template identifier
 
-    this.act({role:name,hook:'content',
+    this.act({role:plugin,hook:'content',
               code:args.code,
               content:_.extend({},options.content,options.content[code]||{},args.content)},function(err,content){
       if( err) return done(err)
@@ -43,11 +44,11 @@ module.exports = function( options ){
   })
 
 
-  seneca.add({role:name,cmd:'send'},function( args, done ){
+  seneca.add({role:plugin,cmd:'send'},function( args, done ){
     var seneca = this
 
     if( args.code ) {
-      seneca.act({role:name,cmd:'generate',code:args.code,content:args.content},function(err,out){
+      seneca.act({role:plugin,cmd:'generate',code:args.code,content:args.content},function(err,out){
         if( err) return done(err)
         do_send(out)
       })
@@ -64,7 +65,7 @@ module.exports = function( options ){
   })
 
 
-  seneca.add({role:name,hook:'content'},function( args, done ){
+  seneca.add({role:plugin,hook:'content'},function( args, done ){
     var code   = args.code // template identifier
 
     var content = this.util.deepextend({},options.content[code]||{},args.content||{})
@@ -73,7 +74,7 @@ module.exports = function( options ){
 
 
 
-  seneca.add({role:name,hook:'send'},function( args, done ){
+  seneca.add({role:plugin,hook:'send'},function( args, done ){
 
     transport.sendMail(args, function(err, response){
       if( err ) return done(err);
@@ -115,7 +116,7 @@ module.exports = function( options ){
     })
   }
 
-  seneca.add({role:name,hook:'init',sub:'templates'},function( args, done ) {
+  seneca.add({role:plugin,hook:'init',sub:'templates'},function( args, done ) {
     initTemplates(this, args.options, done)
   })
 
@@ -125,34 +126,20 @@ module.exports = function( options ){
     callback(null,transport)
   }
 
-  seneca.add({role:name,hook:'init',sub:'transport'},function( args, done ){
+  seneca.add({role:plugin,hook:'init',sub:'transport'},function( args, done ){
     initTransport(args.options, done)
   })
 
 
-  /*
-  seneca.add({init:name},function( args, done ) {
-
-    initTemplates(this, options, function( err ) {
-      if( err ) return done(err)
-
-      initTransport(options, function( err ) {
-        done(err)
-      })
-    })
-  })
-   */
-
-
-  seneca.add({init:name},function( args, done ){
+  seneca.add({init:plugin},function( args, done ){
     var seneca = this
     seneca.act(
-      {role:name,hook:'init',sub:'templates',options:options},
+      {role:plugin,hook:'init',sub:'templates',options:options},
       function( err ){
         if( err ) return done(err);
 
         seneca.act(
-          {role:name,hook:'init',sub:'transport',options:options},
+          {role:plugin,hook:'init',sub:'transport',options:options},
           function( err ){
             if( err ) return done(err);
 
@@ -171,6 +158,6 @@ module.exports = function( options ){
 
 
   return {
-    name:name
+    name:plugin
   }
 }

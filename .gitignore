@@ -18,3 +18,5 @@ node_modules
 .DS_Store
 
 test/sendconf.mine.js
+test/mine.js
+
