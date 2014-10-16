@@ -28,16 +28,43 @@ module.exports = function( options ){
     var seneca = this
 
     if( args.code ) {
-      seneca.act({role:plugin,cmd:'generateBody',code:args.code,content:args.content},function(err,out){
-        if( err) return done(err)
-        do_send(out)
-      })
+      this.act(
+        {
+          role:plugin,hook:'content',
+          code:args.code,
+          content:_.extend(
+            {},
+            options.content,
+            options.content[args.code] || {},
+            args.content
+          )
+        },function(err,content){
+
+          if( err) return done(err)
+
+          seneca.act({role:plugin,cmd:'generateBody',code:args.code,content:content},function(err,out){
+            if( err) return done(err)
+            do_send(out)
+          })
+        })
     }
     else do_send({html:args.html,text:args.text})
 
 
     function do_send(body) {
-      var sendargs = _.extend({},options.mail,args,{cmd:null,hook:'send',text:body.text,html:body.html})
+      var sendargs = _.extend(
+        {},
+        options.mail,
+        args,
+        {
+          cmd:null, hook:'send',
+          text:body.text,
+          html:body.html
+        }
+      )
+      if (body.subject){
+        sendargs.subject = body.subject
+      }
 
       seneca.log.debug('send',sendargs.code||'-',sendargs.to)
       seneca.act(sendargs,done)
