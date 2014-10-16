@@ -1,8 +1,6 @@
 /* Copyright (c) 2013-2014 Richard Rodger, MIT License */
 "use strict";
 
-var fs = require('fs')
-
 var _              = require('underscore')
 var nodemailer     = require("nodemailer")
 var transports     = {
@@ -13,7 +11,6 @@ var transports     = {
   "stub"    : 'nodemailer-stub-transport',
   "pickup"  : 'nodemailer-pickup-transport'
 }
-
 
 module.exports = function( options ){
   var seneca = this
@@ -79,96 +76,11 @@ module.exports = function( options ){
     else return done(null)
   }
 
-  var defaultGenerateBody = function (args, done) {
-    done('Unsupported configuration, downgrade seneca-mail or override "generateBody" seneca command as specified in https://github.com/rjrodger/seneca-mail.')
-  }
-
-  var defaultInit = function (args, done) {
-    var seneca = this
-    seneca.act(
-      {role: plugin, hook: 'init', sub: 'transport', options: options},
-      function (err) {
-        if (err) return done(err);
-
-        done(null)
-      })
-  }
-
-  var templateGenerateBody = function (args, done) {
-    var code     = args.code // template identifier
-
-    this.act({role:plugin,hook:'content',
-      code:args.code,
-      content:_.extend({},options.content,options.content[code]||{},args.content)},function(err,content){
-      if( err) return done(err)
-
-      template( code, content, function(err,html,text){
-        done( err, {ok:!err, html:html, text:text} )
-      })
-    })
-  }
-
-  var templateInit = function (args, done) {
-    var seneca = this
-    seneca.act(
-      {role:plugin,hook:'init',sub:'templates',options:options},
-      function( err ){
-        if( err ) return done(err);
-
-        seneca.act(
-          {role:plugin,hook:'init',sub:'transport',options:options},
-          function( err ){
-            if( err ) return done(err);
-
-            done(null)
-          })
-      })
-  }
-
-  var template
-  var emailtemplates
-
-  function initTemplates(seneca, options, callback) {
-    var folder = options.folder
-
-    if( void 0 != options.templates && !options.templates ) {
-      seneca.log.warn('not using templates')
-      return done()
-    }
-
-    fs.stat( folder, function(err,folderstat) {
-      if( err ) {
-        if( 'ENOENT' == err.code ) {
-          return seneca.fail({code:'no-templates-folder',folder:folder},callback)
-        }
-        else return callback(err);
-      }
-
-      if( !folderstat.isDirectory() ) {
-        return seneca.fail({code:'not-a-folder',folder:folder},callback)
-      }
-
-      emailtemplates( folder, function( err, templateinstance ) {
-        if( err ) return callback(err);
-
-        template = templateinstance
-        callback(null,template)
-      })
-    })
-  }
-
   if (options.folder){
-    seneca.add({init:plugin}, templateInit)
-    seneca.add({role:plugin,cmd:'generateBody'},templateGenerateBody)
-    seneca.add({role:plugin,hook:'init',sub:'templates'},function( args, done ) {
-      initTemplates(this, args.options, done)
-    })
-    emailtemplates = require("email-templates")
+    require('./lib/templateActions')(seneca, options)
   }else{
-    seneca.add({init:plugin}, defaultInit)
-    seneca.add({role:plugin,cmd:'generateBody'},defaultGenerateBody)
+    require('./lib/defaultActions')(seneca, options)
   }
-
 
   seneca.add({role:plugin,hook:'init',sub:'transport'},function( args, done ){
     initTransport(args.options, done)
