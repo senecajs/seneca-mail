@@ -95,7 +95,17 @@ module.exports = function( options ){
   }
 
   var templateGenerateBody = function (args, done) {
-    done('Unsupported configuration, downgrade seneca-mail or override "generateBody" seneca command as specified in https://github.com/rjrodger/seneca-mail.')
+    var code     = args.code // template identifier
+
+    this.act({role:plugin,hook:'content',
+      code:args.code,
+      content:_.extend({},options.content,options.content[code]||{},args.content)},function(err,content){
+      if( err) return done(err)
+
+      template( code, content, function(err,html,text){
+        done( err, {ok:!err, html:html, text:text} )
+      })
+    })
   }
 
   var templateInit = function (args, done) {
@@ -116,6 +126,7 @@ module.exports = function( options ){
   }
 
   var template
+  var emailtemplates
 
   function initTemplates(seneca, options, callback) {
     var folder = options.folder
@@ -146,16 +157,18 @@ module.exports = function( options ){
     })
   }
 
-  if (!options.folder){
-    seneca.add({init:plugin}, defaultInit)
-    seneca.add({role:plugin,cmd:'generateBody'},templateGenerateBody)
-  }else{
+  if (options.folder){
     seneca.add({init:plugin}, templateInit)
     seneca.add({role:plugin,cmd:'generateBody'},templateGenerateBody)
     seneca.add({role:plugin,hook:'init',sub:'templates'},function( args, done ) {
       initTemplates(this, args.options, done)
     })
+    emailtemplates = require("email-templates")
+  }else{
+    seneca.add({init:plugin}, defaultInit)
+    seneca.add({role:plugin,cmd:'generateBody'},defaultGenerateBody)
   }
+
 
   seneca.add({role:plugin,hook:'init',sub:'transport'},function( args, done ){
     initTransport(args.options, done)
