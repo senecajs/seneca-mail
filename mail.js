@@ -94,7 +94,7 @@ module.exports = function( options ){
 
     if( void 0 !== options.templates && !options.templates ) {
       seneca.log.warn('not using templates')
-      return done()
+      return callback()
     }
 
     fs.stat( folder, function(err,folderstat) {
