@@ -159,12 +159,9 @@ module.exports = function( options ){
 
 
   seneca.add({role:'seneca',cmd:'close'},function(args,done){
-    if( transport && _.isFunction( transport.close ) ) {
-      transport.close(done)
-    }
-    else {
-      return done(null)
-    }
+    transport.close()
+
+    this.prior(args,done)
   })
 
 
