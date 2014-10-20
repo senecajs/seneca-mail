@@ -126,7 +126,12 @@ module.exports = function( options ){
 
 
   function initTransport(options, callback) {
-    transport = nodemailer.createTransport( options.transport, options.config )
+    if (options.transport === 'smtp') {
+      transport = nodemailer.createTransport(options.config)
+    }
+    else {
+      return seneca.fail({code:'transport-not-supported',transport:options.transport},callback)
+    }
     callback(null,transport)
   }
 
