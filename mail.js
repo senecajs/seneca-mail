@@ -1,12 +1,12 @@
 /* Copyright (c) 2013-2014 Richard Rodger, MIT License */
-"use strict";
+'use strict';
 
 
 var fs = require('fs')
 
 var _              = require('underscore')
 var emailtemplates = require('email-templates')
-var nodemailer     = require("nodemailer")
+var nodemailer     = require('nodemailer')
 
 
 
@@ -16,7 +16,7 @@ var nodemailer     = require("nodemailer")
 
 module.exports = function( options ){
   var seneca = this
-  var plugin = "mail"
+  var plugin = 'mail'
 
   options = this.util.deepextend({
     folder:    './email-templates',
@@ -35,7 +35,7 @@ module.exports = function( options ){
     this.act({role:plugin,hook:'content',
               code:args.code,
               content:_.extend({},options.content,options.content[code]||{},args.content)},function(err,content){
-      if( err) return done(err)
+      if( err) { return done(err) }
 
       template( code, content, function(err,html,text){
         done( err, {ok:!err, html:html, text:text} )
@@ -49,11 +49,13 @@ module.exports = function( options ){
 
     if( args.code ) {
       seneca.act({role:plugin,cmd:'generate',code:args.code,content:args.content},function(err,out){
-        if( err) return done(err)
+        if( err) { return done(err) }
         do_send(out)
       })
     }
-    else do_send({html:args.html,text:args.text})
+    else {
+      do_send({html:args.html,text:args.text})
+    }
 
 
     function do_send(body) {
@@ -77,7 +79,7 @@ module.exports = function( options ){
   seneca.add({role:plugin,hook:'send'},function( args, done ){
 
     transport.sendMail(args, function(err, response){
-      if( err ) return done(err);
+      if( err ) { return done(err); }
       done(null,{ok:true,details:response})
     })
   })
@@ -90,17 +92,19 @@ module.exports = function( options ){
   function initTemplates(seneca, options, callback) {
     var folder = options.folder
 
-    if( void 0 != options.templates && !options.templates ) {
+    if( void 0 !== options.templates && !options.templates ) {
       seneca.log.warn('not using templates')
       return done()
     }
 
     fs.stat( folder, function(err,folderstat) {
       if( err ) {
-        if( 'ENOENT' == err.code ) {
+        if( 'ENOENT' === err.code ) {
           return seneca.fail({code:'no-templates-folder',folder:folder},callback)
         }
-        else return callback(err);
+        else {
+          return callback(err);
+        }
       }
 
       if( !folderstat.isDirectory() ) {
@@ -108,7 +112,7 @@ module.exports = function( options ){
       }
 
       emailtemplates( folder, function( err, templateinstance ) {
-        if( err ) return callback(err);
+        if( err ) { return callback(err); }
 
         template = templateinstance
         callback(null,template)
@@ -136,12 +140,12 @@ module.exports = function( options ){
     seneca.act(
       {role:plugin,hook:'init',sub:'templates',options:options},
       function( err ){
-        if( err ) return done(err);
+        if( err ) { return done(err); }
 
         seneca.act(
           {role:plugin,hook:'init',sub:'transport',options:options},
           function( err ){
-            if( err ) return done(err);
+            if( err ) { return done(err); }
 
             done(null)
           })
@@ -153,7 +157,9 @@ module.exports = function( options ){
     if( transport && _.isFunction( transport.close ) ) {
       transport.close(done)
     }
-    else return done(null)
+    else {
+      return done(null)
+    }
   })
 
 
