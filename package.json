@@ -37,6 +37,8 @@
     "README.md",
     "LICENSE.txt",
     "mail.js",
-    "test/readme.js"
+    "test/readme.js",
+    "lib/defaultActions.js",
+    "lib/templateActions.js"
   ]
 }
