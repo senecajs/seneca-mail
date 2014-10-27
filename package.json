@@ -1,14 +1,10 @@
 {
   "name": "seneca-mail",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Seneca email plugin",
   "main": "mail.js",
   "scripts": {
     "test": "node mail.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/rjrodger/seneca-mail.git"
   },
   "keywords": [
     "seneca",
