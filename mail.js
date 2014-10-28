@@ -1,20 +1,20 @@
 /* Copyright (c) 2013-2014 Richard Rodger, MIT License */
-"use strict";
+'use strict';
 
 var _              = require('underscore')
-var nodemailer     = require("nodemailer")
+var nodemailer     = require('nodemailer')
 var transports     = {
-  "smtp"    : 'nodemailer-smtp-transport',
-  "ses"     : 'nodemailer-ses-transport',
-  "smtpPool": 'nodemailer-smtp-pool',
-  "sendmail": 'nodemailer-sendmail-transport',
-  "stub"    : 'nodemailer-stub-transport',
-  "pickup"  : 'nodemailer-pickup-transport'
+  'smtp'    : 'nodemailer-smtp-transport',
+  'ses'     : 'nodemailer-ses-transport',
+  'smtpPool': 'nodemailer-smtp-pool',
+  'sendmail': 'nodemailer-sendmail-transport',
+  'stub'    : 'nodemailer-stub-transport',
+  'pickup'  : 'nodemailer-pickup-transport'
 }
 
 module.exports = function( options ){
   var seneca = this
-  var plugin = "mail"
+  var plugin = 'mail'
   var transport
 
   options = this.util.deepextend({
@@ -40,10 +40,14 @@ module.exports = function( options ){
           )
         },function(err,content){
 
-          if( err) return done(err)
+          if( err ) {
+            return done(err)
+          }
 
           seneca.act({role:plugin,cmd:'generateBody',code:args.code,content:content},function(err,out){
-            if( err) return done(err)
+            if( err ) {
+              return done(err)
+            }
             do_send(out)
           })
         })
@@ -57,7 +61,8 @@ module.exports = function( options ){
         options.mail,
         args,
         {
-          cmd:null, hook:'send',
+          cmd:null,
+          hook:'send',
           text:body.text,
           html:body.html
         }
@@ -80,7 +85,9 @@ module.exports = function( options ){
 
   seneca.add({role:plugin,hook:'send'},function( args, done ){
     transport.sendMail(args, function(err, response){
-      if( err ) return done(err);
+      if( err ) {
+        return done(err);
+      }
       done(null,{ok:true,details:response})
     })
   })
@@ -97,10 +104,11 @@ module.exports = function( options ){
   }
 
   var close = function(args,done){
-    if( transport && _.isFunction( transport.close ) ) {
+    if( transport && transport.close && _.isFunction( transport.close ) ) {
       transport.close(done)
     }
-    else return done(null)
+
+    this.prior(args,done)
   }
 
   if (options.folder){
