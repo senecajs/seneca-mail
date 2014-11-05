@@ -10,8 +10,7 @@ describe('mail', function () {
   it('verify default generate', function (done) {
     var si = seneca()
       .use('..')
-    si.ready(function (err) {
-      assert.isUndefined(err)
+    si.ready(function () {
       var mail = si.pin({role: 'mail', cmd: '*'})
 
       mail.generate({code: 'foo', content: {foo: 'bar'}}, function (err, out) {
@@ -25,8 +24,7 @@ describe('mail', function () {
   it('verify template generate', function (done) {
     var si = seneca()
       .use('..', {folder: './email-templates'})
-    si.ready(function (err) {
-      assert.isUndefined(err)
+    si.ready(function () {
 
       var mail = si.pin({role: 'mail', cmd: '*'})
       mail.generate({code: 'foo', content: {foo: 'bar'}}, function (err, out) {
@@ -42,8 +40,7 @@ describe('mail', function () {
   it('verify content', function (done) {
     var si = seneca()
       .use('..', {folder: './email-templates', content: {bar: {a: 1, b: 0}}})
-    si.ready(function (err) {
-      assert.isUndefined(err)
+    si.ready(function () {
 
       var mail = si.pin({role: 'mail', cmd: '*'})
 
@@ -75,8 +72,8 @@ describe('mail', function () {
   it('verify use stub transport using short name', function (done) {
     var si = seneca()
     .use('..', {folder: './email-templates', content: {bar: {a: 1, b: 0}}, transport: 'stub'})
-    si.ready(function (err) {
-      assert.isUndefined(err)
+    si.ready(function () {
+
       var mail = si.pin({role: 'mail', cmd: '*'})
 
       mail.send({code: 'foo', to: 'test@test.com', content: {foo: 'bar'}}, function (err, out) {
@@ -93,8 +90,8 @@ describe('mail', function () {
   it('verify use stub transport real name', function (done) {
     var si = seneca()
       .use('..', {folder: './email-templates', content: {bar: {a: 1, b: 0}}, transport: 'nodemailer-stub-transport'})
-    si.ready(function (err) {
-      assert.isUndefined(err)
+    si.ready(function () {
+
       var mail = si.pin({role: 'mail', cmd: '*'})
 
       mail.send({code: 'foo', to: 'test@test.com', content: {foo: 'bar'}}, function (err, out) {
