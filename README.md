@@ -155,18 +155,24 @@ You may, for example, wish to log email activity to a separate file for audit pu
 
 ## Options
 
-   * _folder_: contains email template sub-folders, default: _'./email-templates'_. 
+   * _folder_: contains email template sub-folders. In case this is missing the 'generate' seneca action should be customized.
    * _content_: insertion values for all email templates (saves repetition), default: _{}_. 
      * non-string sub-objects allow for template-code-specific content (using email _code_ as property name), for example: _{content:{welcome:{subject:'Howdy!'}}}_.
    * _mail: _to_, _from_, etc, fields for all emails, good place for a common _from_ address, default: _{}_.
-   * _transport_: the _nodemailer_ transport, default: _'smtp'_.
+   * _transport_: the _nodemailer_ transport, default: _'smtp'_. For more transport plugins see [available nodemailer transport](https://github.com/andris9/Nodemailer#available-transports)
    * _config_: the _nodemailer_ configuration, default: _{}_.
 
-If you are using a customer email template generator then the _folder_ option may not be needed.
+If you are using a customer email template generator then the _folder_ option is not be needed.
 
-If you are using a different email transport plugin, such as the PostmarkApp one, the _transport_ and _config_ options may not be needed.
+Example for loading email templates from DB can be found in [seneca-mail-dbtemplate](https://github.com/mirceaalexandru/seneca-mail-dbtemplate)
 
+If you are using a custom email transport plugin, use:
+    * _transport_ - transport name
+    * _transportPluginName_ - is the name of the transport plugin that will be loaded
 
+Please see transport [api plugin documentation](https://github.com/andris9/Nodemailer#transports) for details
+
+In both cases - custom transport or standard transport plugin - the specified transport should be loaded from project package.json, is not seneca-mail's concern.
 
 ## Actions
 
