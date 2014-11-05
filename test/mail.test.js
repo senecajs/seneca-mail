@@ -71,4 +71,40 @@ describe('mail', function () {
       })
     })
   })
+
+  it('verify use stub transport using short name', function (done) {
+    var si = seneca()
+    .use('..', {folder: './email-templates', content: {bar: {a: 1, b: 0}}, transport: 'stub'})
+    si.ready(function (err) {
+      assert.isUndefined(err)
+      var mail = si.pin({role: 'mail', cmd: '*'})
+
+      mail.send({code: 'foo', to: 'test@test.com', content: {foo: 'bar'}}, function (err, out) {
+        assert.isNull(err)
+        assert.isNotNull(out)
+        assert.isNotNull(out.details.response)
+        console.log(out.details.response.toString())
+
+        done()
+      })
+    })
+  })
+
+  it('verify use stub transport real name', function (done) {
+    var si = seneca()
+      .use('..', {folder: './email-templates', content: {bar: {a: 1, b: 0}}, transport: 'nodemailer-stub-transport'})
+    si.ready(function (err) {
+      assert.isUndefined(err)
+      var mail = si.pin({role: 'mail', cmd: '*'})
+
+      mail.send({code: 'foo', to: 'test@test.com', content: {foo: 'bar'}}, function (err, out) {
+        assert.isNull(err)
+        assert.isNotNull(out)
+        assert.isNotNull(out.details.response)
+        console.log(out.details.response.toString())
+
+        done()
+      })
+    })
+  })
 })
