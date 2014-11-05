@@ -6,10 +6,6 @@
   "scripts": {
     "test": "node mail.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/rjrodger/seneca-mail.git"
-  },
   "keywords": [
     "seneca",
     "mail",
@@ -31,12 +27,17 @@
     "chai": "~1.9.1",
     "gex": "~0.1.4",
     "mocha": "~1.20.1",
-    "seneca": "~0.5.17"
+    "seneca": "~0.5.17",
+    "nodemailer-smtp-transport": "~0.1.13",
+    "nodemailer-stub-transport": "~0.1.4",
+    "ejs": "~1.0.0"
   },
   "files": [
     "README.md",
     "LICENSE.txt",
     "mail.js",
-    "test/readme.js"
+    "test/readme.js",
+    "lib/defaultActions.js",
+    "lib/templateActions.js"
   ]
 }
