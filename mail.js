@@ -44,7 +44,7 @@ module.exports = function( options ){
             return done(err)
           }
 
-          seneca.act({role:plugin,cmd:'generateBody',code:args.code,content:content},function(err,out){
+          seneca.act({role:plugin,cmd:'generate',code:args.code,content:content},function(err,out){
             if( err ) {
               return done(err)
             }
