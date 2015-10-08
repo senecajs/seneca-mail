@@ -100,7 +100,7 @@ module.exports = function( options ){
     transportPlugin = require(transportPluginName)
 
     transport = nodemailer.createTransport( transportPlugin(options.config) )
-    callback(null, transport)
+    callback(null, {})
   }
 
   var close = function(args,done){
