@@ -11,6 +11,9 @@ seneca.use('..',{
       user: "admin@example.com",
       pass: "PASSWORD"
     }
+//    host: "127.0.0.1",
+//    port: 25,
+//    ignoreTLS: true
   }
 })
 
