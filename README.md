@@ -1,3 +1,5 @@
+![Seneca](http://senecajs.org/files/assets/seneca-logo.png)
+
 # seneca-mail
 
 ## An email plugin for the [Seneca](http://senecajs.org) toolkit
@@ -240,9 +242,6 @@ None.
    * _role:mail, hook:content_: to customize content generation 
 
 
-
-
-
 ## Logging
 
 To see what this plugin is doing, try:
@@ -363,11 +362,12 @@ Implementation dependent object.
 ## Test
 
 ```sh
-cd test
-mocha mail.test.js --seneca.log.print
+npm test
 ```
 
-Copy _sendconf.example.js_ and add real configuration values, and then send a mail with:
+## Run simple example
+
+Copy _sendconf.example.js_ to _sendconf.mine.js_and add real configuration values, and then send a mail with:
 
 ```sh
 cd test

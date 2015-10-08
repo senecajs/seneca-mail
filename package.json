@@ -4,7 +4,7 @@
   "description": "Seneca email plugin",
   "main": "mail.js",
   "scripts": {
-    "test": "node mail.js"
+    "test": "lab -v -L -c -P test"
   },
   "keywords": [
     "seneca",
@@ -17,6 +17,7 @@
   "dependencies": {
     "email-templates": "~2.0.1",
     "eraro": "^0.4.1",
+    "lab": "^6.2.0",
     "nodemailer": "~1.4.0",
     "nodemailer-smtp-transport": "~1.0.3",
     "nodemailer-stub-transport": "~1.0.0",
@@ -26,10 +27,7 @@
     "seneca": "*"
   },
   "devDependencies": {
-    "async": "~1.4.2",
-    "chai": "~3.3.0",
-    "gex": "~0.2.2",
-    "mocha": "~2.3.3",
+    "lab": "^6.2.0",
     "seneca": "~0.6.5",
     "ejs": "~2.3.4"
   },
@@ -37,7 +35,7 @@
     "README.md",
     "LICENSE.txt",
     "mail.js",
-    "test/readme.js",
+    "test/mail.test.js",
     "lib/defaultActions.js",
     "lib/templateActions.js"
   ]
