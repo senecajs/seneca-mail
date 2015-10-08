@@ -1,6 +1,6 @@
 {
   "name": "seneca-mail",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Seneca email plugin",
   "main": "mail.js",
   "scripts": {
@@ -15,11 +15,12 @@
   "author": "Richard Rodger (http://richardrodger.com)",
   "license": "MIT",
   "dependencies": {
-    "underscore": "~1.8.3",
     "email-templates": "~2.0.1",
+    "eraro": "^0.4.1",
+    "nodemailer": "~1.4.0",
     "nodemailer-smtp-transport": "~1.0.3",
     "nodemailer-stub-transport": "~1.0.0",
-    "nodemailer": "~1.4.0"
+    "underscore": "~1.8.3"
   },
   "peerDependencies": {
     "seneca": "*"
