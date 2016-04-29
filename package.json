@@ -15,7 +15,7 @@
   "author": "Richard Rodger (http://richardrodger.com)",
   "license": "MIT",
   "dependencies": {
-    "email-templates": "~2.0.1",
+    "email-templates": "~2.3.0",
     "eraro": "^0.4.1",
     "lab": "^6.2.0",
     "nodemailer": "~1.4.0",
