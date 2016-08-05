@@ -1,8 +1,8 @@
 /* Copyright (c) 2013-2014 Richard Rodger, MIT License */
-'use strict';
+'use strict'
 
-var _ = require( 'underscore' )
-var nodemailer = require( 'nodemailer' )
+var _ = require('lodash')
+var Nodemailer = require('nodemailer')
 var transports = {
   'smtp': 'nodemailer-smtp-transport',
   'ses': 'nodemailer-ses-transport',
@@ -12,120 +12,141 @@ var transports = {
   'pickup': 'nodemailer-pickup-transport'
 }
 
-module.exports = function( options ) {
+module.exports = function(options) {
   var seneca = this
   var plugin = 'mail'
   var transport
 
-  options = this.util.deepextend( {
+  options = this.util.deepextend({
     content: {},
     mail: {},
     transport: 'smtp',
     config: {}
-  }, options )
+  }, options)
 
-  var sendMail = function( args, done ) {
+  var sendMail = function(args, done) {
     var seneca = this
 
-    if( args.code ) {
-      this.act(
-        {
-          role: plugin, hook: 'content',
+    if (args.code) {
+      this.act({
+        role: plugin,
+        hook: 'content',
+        code: args.code,
+        content: _.extend({},
+          options.content,
+          options.content[args.code] || {},
+          args.content
+        )
+      }, function(err, content) {
+        if (err) {
+          return done(err)
+        }
+
+        seneca.act({
+          role: plugin,
+          cmd: 'generate',
           code: args.code,
-          content: _.extend(
-            {},
-            options.content,
-            options.content[args.code] || {},
-            args.content
-          )
-        }, function( err, content ) {
-
-          if( err ) {
-            return done( err )
+          content: content
+        }, function(err, out) {
+          if (err) {
+            return done(err)
           }
-
-          seneca.act( {role: plugin, cmd: 'generate', code: args.code, content: content}, function( err, out ) {
-            if( err ) {
-              return done( err )
-            }
-            do_send( out )
-          } )
-        } )
-    }
-    else {
-      do_send( {html: args.html, text: args.text} )
+          do_send(out)
+        })
+      })
+    } else {
+      do_send({
+        html: args.html,
+        text: args.text
+      })
     }
 
 
-    function do_send( body ) {
-      var sendargs = _.extend(
-        {},
+    function do_send(body) {
+      var sendargs = _.extend({},
         options.mail,
-        args,
-        {
+        args, {
           cmd: null,
           hook: 'send',
           text: body.text,
           html: body.html
         }
       )
-      if( body.subject ) {
+      if (body.subject) {
         sendargs.subject = body.subject
       }
 
-      seneca.log.debug( 'send', sendargs.code || '-', sendargs.to )
-      seneca.act( sendargs, done )
+      seneca.log.debug('send', sendargs.code || '-', sendargs.to)
+      seneca.act(sendargs, done)
     }
   }
 
-  var getContent = function( args, done ) {
+  var getContent = function(args, done) {
     var code = args.code // template identifier
 
-    var content = this.util.deepextend( {}, options.content[code] || {}, args.content || {} )
-    done( null, content )
+    var content = this.util.deepextend({}, options.content[code] || {}, args.content || {})
+    done(null, content)
   }
 
-  seneca.add( {role: plugin, hook: 'send'}, function( args, done ) {
-    transport.sendMail( args, function( err, response ) {
-      if( err ) {
-        return done( err );
+  seneca.add({
+    role: plugin,
+    hook: 'send'
+  }, function(args, done) {
+    transport.sendMail(args, function(err, response) {
+      if (err) {
+        return done(err)
       }
-      done( null, {ok: true, details: response} )
-    } )
-  } )
+      done(null, {
+        ok: true,
+        details: response
+      })
+    })
+  })
 
-  function initTransport( options, callback ) {
+  function initTransport(options, callback) {
     var transportPluginName = transports[options.transport] || options.transportPluginName || options.transport
     var transportPlugin
 
-    seneca.log.debug( 'Loading specified transport definition: ' + transportPluginName )
-    transportPlugin = require( transportPluginName )
+    seneca.log.debug('Loading specified transport definition: ' + transportPluginName)
+    transportPlugin = require(transportPluginName)
 
-    transport = nodemailer.createTransport( transportPlugin( options.config ) )
-    callback( null, {} )
+    transport = Nodemailer.createTransport(transportPlugin(options.config))
+    callback(null, {})
   }
 
-  var close = function( args, done ) {
-    if( transport && transport.close && _.isFunction( transport.close ) ) {
-      transport.close( done )
+  var close = function(args, done) {
+    if (transport && transport.close && _.isFunction(transport.close)) {
+      transport.close(done)
     }
 
-    this.prior( args, done )
+    this.prior(args, done)
   }
 
-  if( options.folder ) {
-    require( './lib/templateActions' )( seneca, options )
-  }
-  else {
-    require( './lib/defaultActions' )( seneca, options )
+  if (options.folder) {
+    require('./lib/templateActions')(seneca, options)
+  } else {
+    require('./lib/defaultActions')(seneca, options)
   }
 
-  seneca.add( {role: plugin, hook: 'init', sub: 'transport'}, function( args, done ) {
-    initTransport( args.options, done )
-  } )
-  seneca.add( {role: plugin, cmd: 'send'}, sendMail )
-  seneca.add( {role: plugin, hook: 'content'}, getContent )
-  seneca.add( {role: 'seneca', cmd: 'close'}, close )
+  seneca.add({
+    role: plugin,
+    hook: 'init',
+    sub: 'transport'
+  }, function(args, done) {
+    initTransport(args.options, done)
+  })
+  seneca.add({
+    role: plugin,
+    cmd: 'send'
+  }, sendMail)
+  seneca.add({
+    role: plugin,
+    hook: 'content'
+  }, getContent)
+  seneca.add({
+    role: 'seneca',
+    cmd: 'close'
+  }, close)
 
   return {
     name: plugin

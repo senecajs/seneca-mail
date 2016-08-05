@@ -1,16 +1,24 @@
-var path = require( 'path' )
+var Path = require('path')
 
 module.exports = {
-  send: { code: 'hello', to: 'foo@example.com' },
+  send: {
+    code: 'hello',
+    to: 'foo@example.com'
+  },
 
-  folder: path.join( __dirname, 'email-templates' ),
-  content: {foo: 'bar'},
-  mail: {from: 'bar@example.com', subject: 'seneca-mail'},
+  folder: Path.join(__dirname, 'email-templates'),
+  content: {
+    foo: 'bar'
+  },
+  mail: {
+    from: 'bar@example.com',
+    subject: 'seneca-mail'
+  },
   config: {
-    service: "Gmail",
+    service: 'Gmail',
     auth: {
-      user: "bar@example.com",
-      pass: "password"
+      user: 'bar@example.com',
+      pass: 'password'
     }
   }
 }

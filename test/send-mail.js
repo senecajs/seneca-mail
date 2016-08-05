@@ -1,31 +1,29 @@
 /* Copyright (c) 2013 Richard Rodger */
-"use strict";
+'use strict'
 
-var sendconf = require( './sendconf.mine.js' )
+var Sendconf = require('./sendconf.mine.js')
 
-var seneca = require( 'seneca' )()
-seneca.use( '..', sendconf )
+var seneca = require('seneca')()
+seneca.use('..', Sendconf)
 
-seneca.ready( function( err ) {
-  if( err ) {
-    return console.log( err );
+seneca.ready(function(err) {
+  if (err) {
+    return console.log(err)
   }
 
   seneca.act(
-    "role: 'mail', cmd: 'send'",
-    {
-      code: sendconf.send.code,
-      to: sendconf.send.to,
-      content:
-      {
+    "role: 'mail', cmd: 'send'", {
+      code: Sendconf.send.code,
+      to: Sendconf.send.to,
+      content: {
         name: 'Richard'
       }
-    }, function( err, out ) {
+    },
+    function(err, out) {
+      console.dir(err)
+      console.dir(out)
 
-    console.dir( err )
-    console.dir( out )
-
-    // nodemailer keeps connections open
-    seneca.close()
-  } )
-} )
+      // nodemailer keeps connections open
+      seneca.close()
+    })
+})

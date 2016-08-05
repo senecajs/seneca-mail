@@ -1,29 +1,29 @@
-var seneca = require( 'seneca' )()
+var Seneca = require('Seneca')()
 
-seneca.use( '..', {
+Seneca.use('..', {
   folder: './email-templates',
   mail: {
     from: 'help@example.com'
   },
   config: {
-    service: "Gmail",
+    service: 'Gmail',
     auth: {
-      user: "admin@example.com",
-      pass: "PASSWORD"
+      user: 'admin@example.com',
+      pass: 'PASSWORD'
     }
-//    host: "127.0.0.1",
-//    port: 25,
-//    ignoreTLS: true
+    //    host: "127.0.0.1",
+    //    port: 25,
+    //    ignoreTLS: true
   }
-} )
+})
 
 
-seneca.ready( function( err ) {
-  if( err ) {
-    return console.log( err );
+Seneca.ready(function(err) {
+  if (err) {
+    return console.log(err)
   }
 
-  seneca.act( {
+  Seneca.act({
     role: 'mail',
     cmd: 'send',
     code: 'welcome',
@@ -32,5 +32,5 @@ seneca.ready( function( err ) {
     content: {
       name: 'Customer One'
     }
-  } )
-} )
+  })
+})
