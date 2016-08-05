@@ -1,6 +1,4 @@
 language: node_js
-before_script:
-  - npm i eslint-plugin-standard@1.x.x
 node_js:
   - 4
   - 5
