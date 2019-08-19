@@ -1,133 +1,90 @@
-/* Copyright (c) 2013-2014 Richard Rodger, MIT License */
-'use strict';
+/* Copyright (c) 2013-2019 Richard Rodger and other contributors, MIT License */
+"use strict"
 
-var _ = require( 'underscore' )
-var nodemailer = require( 'nodemailer' )
-var transports = {
-  'smtp': 'nodemailer-smtp-transport',
-  'ses': 'nodemailer-ses-transport',
-  'smtpPool': 'nodemailer-smtp-pool',
-  'sendmail': 'nodemailer-sendmail-transport',
-  'stub': 'nodemailer-stub-transport',
-  'pickup': 'nodemailer-pickup-transport'
+
+const Email = require('email-templates')
+
+
+module.exports = mail
+module.exports.defaults = {
+  test: false,
+  email: {
+    // NOTE: for safety the default is to not send email
+    send: false,
+    preview: false
+  }
 }
 
-module.exports = function( options ) {
+
+
+function mail(options) {
   var seneca = this
-  var plugin = 'mail'
-  var transport
+  var mailer
+  
+  // TODO seneca 4.x with embedded promisify should support this
+  seneca.depends('promisify')
+  
+  
+  seneca
+    .message('sys:mail,send:mail', send_mail)
+    .message('sys:mail,hook:render', hook_render)
 
-  options = this.util.deepextend( {
-    content: {},
-    mail: {},
-    transport: 'smtp',
-    config: {}
-  }, options )
+  
+  seneca.prepare(async function() {
+    var root = seneca.root
+    
+    var email_opts = options.email 
 
-  var sendMail = function( args, done ) {
-    var seneca = this
-
-    if( args.code ) {
-      this.act(
-        {
-          role: plugin, hook: 'content',
-          code: args.code,
-          content: _.extend(
-            {},
-            options.content,
-            options.content[args.code] || {},
-            args.content
-          )
-        }, function( err, content ) {
-
-          if( err ) {
-            return done( err )
-          }
-
-          seneca.act( {role: plugin, cmd: 'generate', code: args.code, content: content}, function( err, out ) {
-            if( err ) {
-              return done( err )
-            }
-            do_send( out )
-          } )
-        } )
-    }
-    else {
-      do_send( {html: args.html, text: args.text} )
+    // create transport
+    var transport_opts = email_opts.transport
+    if(transport_opts) {
+      var transport_maker = require('nodemailer-'+transport_opts.name)
+      var transport = transport_maker(transport_opts.options)
+      email_opts.transport = transport
     }
 
+    email_opts.render = async (view, content) => {
+      var code = view.split('/')[0]
+      var part = view.split('/')[1]
+      
+      // TODO: how to make this action specific?
+      var res = await root.post('sys:mail,hook:render', {code,part,content})
+      var html = await mailer.juiceResources(res.html)
 
-    function do_send( body ) {
-      var sendargs = _.extend(
-        {},
-        options.mail,
-        args,
-        {
-          cmd: null,
-          hook: 'send',
-          text: body.text,
-          html: body.html
-        }
-      )
-      if( body.subject ) {
-        sendargs.subject = body.subject
-      }
+      return html
+    }
+    
+    mailer = new Email(email_opts) 
+  })
 
-      seneca.log.debug( 'send', sendargs.code || '-', sendargs.to )
-      seneca.act( sendargs, done )
+
+  async function send_mail(msg) {
+    var content = msg.content
+
+    var mail_opts = {
+      template: msg.code,
+      message: {
+        to: msg.to,
+        from: msg.from,
+        subject: msg.subject,
+      },
+      locals: content
+    }
+
+    var res = await mailer.send(mail_opts)
+
+    return {
+      msg: msg,
+      sent: res
     }
   }
 
-  var getContent = function( args, done ) {
-    var code = args.code // template identifier
-
-    var content = this.util.deepextend( {}, options.content[code] || {}, args.content || {} )
-    done( null, content )
-  }
-
-  seneca.add( {role: plugin, hook: 'send'}, function( args, done ) {
-    transport.sendMail( args, function( err, response ) {
-      if( err ) {
-        return done( err );
-      }
-      done( null, {ok: true, details: response} )
-    } )
-  } )
-
-  function initTransport( options, callback ) {
-    var transportPluginName = transports[options.transport] || options.transportPluginName || options.transport
-    var transportPlugin
-
-    seneca.log.debug( 'Loading specified transport definition: ' + transportPluginName )
-    transportPlugin = require( transportPluginName )
-
-    transport = nodemailer.createTransport( transportPlugin( options.config ) )
-    callback( null, {} )
-  }
-
-  var close = function( args, done ) {
-    if( transport && transport.close && _.isFunction( transport.close ) ) {
-      transport.close( done )
+  
+  async function hook_render(msg) {
+    return {
+      html: 'NO RENDER DEFINED FOR '+msg.code+
+        ', content was: '+JSON.stringify(msg.content)
     }
-
-    this.prior( args, done )
   }
-
-  if( options.folder ) {
-    require( './lib/templateActions' )( seneca, options )
-  }
-  else {
-    require( './lib/defaultActions' )( seneca, options )
-  }
-
-  seneca.add( {role: plugin, hook: 'init', sub: 'transport'}, function( args, done ) {
-    initTransport( args.options, done )
-  } )
-  seneca.add( {role: plugin, cmd: 'send'}, sendMail )
-  seneca.add( {role: plugin, hook: 'content'}, getContent )
-  seneca.add( {role: 'seneca', cmd: 'close'}, close )
-
-  return {
-    name: plugin
-  }
-}
+}  
+  
