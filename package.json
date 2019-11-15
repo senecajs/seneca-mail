@@ -32,6 +32,8 @@
     "nodemailer-stub-transport": "~1.1.0"
   },
   "devDependencies": {
+    "@hapi/code": "^7.0.0",
+    "@hapi/lab": "^21.0.0",
     "nodemailer-sendgrid": "^1.0.3",
     "seneca": "plugin",
     "seneca-doc": "^1.4.0",
