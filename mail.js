@@ -50,10 +50,10 @@ function mail(options) {
 
       var out = res && res[part]
 
-      if('html' === part) {
+      if ('html' === part) {
         out = await mailer.juiceResources(out)
       }
-      
+
       return out
     }
 
