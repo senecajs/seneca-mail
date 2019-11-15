@@ -10,8 +10,12 @@
     "coveralls": "lab -s -P test -r lcov | coveralls",
     "clean-npm": "rm -rf node_modules package-lock.json",
     "clean-yarn": "rm -rf node_modules yarn.lock",
+    "clean": "rm -rf node_modules yarn.lock package-lock.json",
+    "reset": "npm run clean && npm i && npm test",
+    "repo-check": "REPO_VERSION=`node -e \"console.log(require('./package').version)\"` && echo TAG: v$REPO_VERSION && [[ '' == `git tag --list v${REPO_VERSION}` ]]",
     "repo-tag": "REPO_VERSION=`node -e \"console.log(require('./package').version)\"` && echo TAG: v$REPO_VERSION && git commit -a -m v$REPO_VERSION && git push && git tag v$REPO_VERSION && git push --tags;",
-    "repo-publish": "npm run prettier && npm test && npm run doc && npm run repo-tag && npm publish --access public"
+    "repo-publish": "npm run repo-check && npm run clean && npm i --registry http://registry.npmjs.org && npm run prettier && npm test && npm run repo-tag && npm publish --registry http://registry.npmjs.org",
+    "repo-publish-quick": "npm run repo-check && npm run prettier && npm run build && npm test && npm run repo-tag && npm publish --registry http://registry.npmjs.org"
   },
   "keywords": [
     "seneca",
@@ -22,19 +26,18 @@
   "author": "Richard Rodger (http://richardrodger.com)",
   "license": "MIT",
   "dependencies": {
-    "email-templates": "~6.0.0",
-    "nodemailer": "~6.3.0",
+    "email-templates": "~6.0.3",
+    "nodemailer": "~6.3.1",
     "nodemailer-smtp-transport": "~2.7.4",
-    "nodemailer-stub-transport": "~1.1.0",
-    "underscore": "~1.9.1"
+    "nodemailer-stub-transport": "~1.1.0"
   },
   "devDependencies": {
     "nodemailer-sendgrid": "^1.0.3",
     "seneca": "plugin",
-    "seneca-doc": "^1.0.0",
-    "seneca-entity": "^4.1.0",
-    "seneca-plugin-validator": "^0.1.1",
-    "seneca-promisify": "^0.8.0"
+    "seneca-doc": "^1.4.0",
+    "seneca-entity": "^5.2.0",
+    "seneca-plugin-validator": "^0.4.0",
+    "seneca-promisify": "^1.1.0"
   },
   "files": [
     "README.md",
