@@ -1,3 +1,18 @@
 language: node_js
+
+env:
+  - SENECA_VER=senecajs/seneca
+  - SENECA_VER=plugin
+
 node_js:
+  - '14'
+  - '13'
+  - '12'
   - '10'
+
+before_script:
+  - npm uninstall seneca
+  - npm install $SENECA_VER
+
+after_script:
+  - npm run coveralls
