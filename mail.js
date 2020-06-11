@@ -43,14 +43,13 @@ function mail(options) {
 
       var code = null
       var owner = null
-      if(orig_code.includes('~')) {
+      if (orig_code.includes('~')) {
         code = orig_code.split('~')[0]
         owner = orig_code.split('~')[1]
-      }
-      else {
+      } else {
         code = orig_code
       }
-      
+
       // TODO: how to make this action specific?
       var res = await root.post('sys:mail,hook:render', {
         code,
@@ -75,10 +74,10 @@ function mail(options) {
     var content = msg.content
 
     var template = msg.code
-    if(null != msg.owner) {
-      template = template+'~'+msg.owner
+    if (null != msg.owner) {
+      template = template + '~' + msg.owner
     }
-    
+
     var mail_opts = {
       template,
       message: {
