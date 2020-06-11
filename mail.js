@@ -1,4 +1,4 @@
-/* Copyright (c) 2013-2019 Richard Rodger and other contributors, MIT License */
+/* Copyright (c) 2013-2020 Richard Rodger and other contributors, MIT License */
 'use strict'
 
 const Email = require('email-templates')
@@ -38,12 +38,23 @@ function mail(options) {
     }
 
     email_opts.render = async (view, content) => {
-      var code = view.split('/')[0]
+      var orig_code = view.split('/')[0]
       var part = view.split('/')[1]
 
+      var code = null
+      var owner = null
+      if(orig_code.includes('~')) {
+        code = orig_code.split('~')[0]
+        owner = orig_code.split('~')[1]
+      }
+      else {
+        code = orig_code
+      }
+      
       // TODO: how to make this action specific?
       var res = await root.post('sys:mail,hook:render', {
         code,
+        owner,
         part,
         content
       })
@@ -63,8 +74,13 @@ function mail(options) {
   async function send_mail(msg) {
     var content = msg.content
 
+    var template = msg.code
+    if(null != msg.owner) {
+      template = template+'~'+msg.owner
+    }
+    
     var mail_opts = {
-      template: msg.code,
+      template,
       message: {
         to: msg.to,
         from: msg.from,

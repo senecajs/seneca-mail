@@ -4,7 +4,7 @@
   "description": "Seneca email plugin",
   "main": "mail.js",
   "scripts": {
-    "test": "lab -v -L -P test -t 50 -I __core-js_shared__",
+    "test": "lab -v -L -P test -t 50 -I __core-js_shared__ -r console -o stdout -r html -o test/coverage.html",
     "doc": "seneca-doc",
     "prettier": "prettier --write *.js lib/*.js bin/*.js test/*.js",
     "coveralls": "lab -s -P test -r lcov | coveralls",
@@ -26,20 +26,20 @@
   "author": "Richard Rodger (http://richardrodger.com)",
   "license": "MIT",
   "dependencies": {
-    "email-templates": "~6.0.3",
-    "nodemailer": "~6.3.1",
+    "email-templates": "~7.0.5",
+    "nodemailer": "~6.4.8",
     "nodemailer-smtp-transport": "~2.7.4",
     "nodemailer-stub-transport": "~1.1.0"
   },
   "devDependencies": {
-    "@hapi/code": "^7.0.0",
-    "@hapi/lab": "^21.0.0",
+    "@hapi/code": "^8.0.1",
+    "@hapi/lab": "^22.0.4",
+    "@seneca/doc": "^4.0.0",
     "nodemailer-sendgrid": "^1.0.3",
     "seneca": "plugin",
-    "seneca-doc": "^1.4.0",
-    "seneca-entity": "^5.2.0",
-    "seneca-plugin-validator": "^0.4.0",
-    "seneca-promisify": "^1.1.0"
+    "seneca-entity": "^9.0.1",
+    "seneca-plugin-validator": "^0.6.1",
+    "seneca-promisify": "^1.4.0"
   },
   "files": [
     "README.md",

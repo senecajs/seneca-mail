@@ -14,6 +14,7 @@ const Plugin = require('..')
 
 lab.test('validate', PluginValidator(Plugin, module))
 
+
 lab.test('happy', async () => {
   var si = await seneca_instance().ready()
   var address = 'alice@example.com'
@@ -44,6 +45,51 @@ lab.test('happy', async () => {
 
   expect(res.sent.message).includes('Foo BarraB ooF')
 })
+
+
+
+lab.test('owner', async () => {
+  var si = await seneca_instance().ready()
+  var address = 'bob@example.com'
+  var res
+
+  si
+    .message('sys:mail,hook:render,code:foo,owner:o01', async function(msg) {
+      return { html: `Owner01 ${msg.content.foo}` }
+    })
+    .message('sys:mail,hook:render,code:foo,owner:o02', async function(msg) {
+      return { html: `Owner02 ${msg.content.foo}` }
+    })
+
+  
+  res = await si.post('sys:mail,send:mail', {
+    code: 'foo',
+    owner: 'o01',
+    to: address,
+    content: {
+      foo: 'FOO'
+    }
+  })
+
+  expect(res.msg.code).equals('foo')
+  expect(res.msg.owner).equals('o01')
+  expect(res.sent.message).includes('Owner01 FOO')
+
+
+  res = await si.post('sys:mail,send:mail', {
+    code: 'foo',
+    owner: 'o02',
+    to: address,
+    content: {
+      foo: 'FOO'
+    }
+  })
+
+  expect(res.msg.code).equals('foo')
+  expect(res.msg.owner).equals('o02')
+  expect(res.sent.message).includes('Owner02 FOO')
+})
+
 
 function seneca_instance(seneca_options, plugin_options) {
   return Seneca(seneca_options, { legacy: { transport: false } })
