@@ -15,7 +15,9 @@
     "repo-check": "REPO_VERSION=`node -e \"console.log(require('./package').version)\"` && echo TAG: v$REPO_VERSION && [[ '' == `git tag --list v${REPO_VERSION}` ]]",
     "repo-tag": "REPO_VERSION=`node -e \"console.log(require('./package').version)\"` && echo TAG: v$REPO_VERSION && git commit -a -m v$REPO_VERSION && git push && git tag v$REPO_VERSION && git push --tags;",
     "repo-publish": "npm run repo-check && npm run clean && npm i --registry http://registry.npmjs.org && npm run prettier && npm test && npm run repo-tag && npm publish --registry http://registry.npmjs.org",
-    "repo-publish-quick": "npm run repo-check && npm run prettier && npm run build && npm test && npm run repo-tag && npm publish --registry http://registry.npmjs.org"
+    "repo-publish-quick": "npm run repo-check && npm run prettier && npm run build && npm test && npm run repo-tag && npm publish --registry http://registry.npmjs.org",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "keywords": [
     "seneca",
@@ -29,7 +31,8 @@
     "email-templates": "~7.0.5",
     "nodemailer": "~6.4.8",
     "nodemailer-smtp-transport": "~2.7.4",
-    "nodemailer-stub-transport": "~1.1.0"
+    "nodemailer-stub-transport": "~1.1.0",
+    "snyk": "^1.339.1"
   },
   "devDependencies": {
     "@hapi/code": "^8.0.1",
@@ -45,5 +48,6 @@
     "README.md",
     "LICENSE.txt",
     "mail.js"
-  ]
+  ],
+  "snyk": true
 }
