@@ -5,6 +5,10 @@ Send emails with templates.
 
 
 [![Build Status](https://travis-ci.org/senecajs/seneca-mail.svg?branch=master)](https://travis-ci.org/senecajs/seneca-mail)
+[![Coverage Status](https://coveralls.io/repos/github/senecajs/seneca-mail/badge.svg?branch=master)](https://coveralls.io/github/senecajs/seneca-mail?branch=master)
+<a href="https://codeclimate.com/github/senecajs/seneca-mail/maintainability"><img src="https://api.codeclimate.com/v1/badges/70f83e6658979f229707/maintainability" /></a>
+<a href="https://codeclimate.com/github/senecajs/seneca-mail/maintainability"><img src="https://api.codeclimate.com/v1/badges/70f83e6658979f229707/maintainability" /></a>
+
 
 
 
