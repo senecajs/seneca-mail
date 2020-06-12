@@ -1,6 +1,8 @@
 /* Copyright (c) 2013-2020 Richard Rodger and other contributors, MIT License */
 'use strict'
 
+
+const Uuid = require('uuid')
 const Email = require('email-templates')
 
 module.exports = mail
@@ -128,18 +130,28 @@ function mail(options) {
         msg.orbit
     }
 
+    // TODO: support domain suffix?
+    var messageId = Uuid.v4()
+    
     var mail_opts = {
       template,
       message: {
         to: msg.to,
         from: msg.from,
-        subject: msg.subject
+        subject: msg.subject,
+        messageId
       },
       locals: content
     }
 
     var sent = await mailer.send(mail_opts)
-
+    var statusCode = sent ? sent.statusCode : 0
+    
+    var result = sent && 'function' === typeof(sent.toJSON) ? sent.toJSON() : {
+      messageId: messageId,
+      statusCode: statusCode,
+    }
+    
     var savehist =
       (options.history && false !== msg.history) ||
       (!options.history && true === msg.history)
@@ -154,9 +166,10 @@ function mail(options) {
           ...msg,
           template,
           when,
-          sent,
-          mid: sent.messageId,
-          ...options.makehist({ msg, meta, template, sent, when })
+          mid: messageId,
+          status: statusCode,
+          result,
+          ...options.makehist({ msg, meta, template, sent, result, when })
         })
         .save$()
     }
@@ -168,14 +181,22 @@ function mail(options) {
           ...msg,
           template,
           when,
-          mid: sent.messageId
+          mid: sent.messageId,
+          status: statusCode,
         }
       })
     }
 
     return {
       msg,
-      sent,
+
+      // NOTE: avoid sending internal objects back (sendgrid issue)
+      sent: Array.isArray(sent) ?
+        {message:sent[2]?
+         sent[2].originalMessage.html?sent[2].originalMessage.html:'':''} :
+        sent,
+
+      result,
       template
     }
   }
