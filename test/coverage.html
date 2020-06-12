@@ -536,7 +536,7 @@
         <li><a href="#tests">Test Report</a></li>
         <li><a href="#coverage">Coverage Report</a></li>
         <li class="">
-            <span class="cov high">90.55</span>
+            <span class="cov high">91.04</span>
             <a href="#mail.js"><span class="basename">mail.js</span></a>
         </li>
         <li><a href="#linting">Linting Report</a></li>
@@ -547,7 +547,7 @@
           <div class="failures">0</div>
           <div class="skipped">0</div>
           <div class="test-count">3</div>
-          <div class="duration">417</div>
+          <div class="duration">382</div>
       </div>
       <div id="filters">
           <input type="checkbox" checked="" onchange="filter(this)" value="success" id="show-success">
@@ -570,21 +570,21 @@
               <td class="test-title">validate
                   
               </td>
-              <td class="test-duration">4</td>
+              <td class="test-duration">5</td>
           </tr>
           <tr class="show  success">
               <td class="test-id">2</td>
               <td class="test-title">happy
                   
               </td>
-              <td class="test-duration">256</td>
+              <td class="test-duration">227</td>
           </tr>
           <tr class="show  success">
               <td class="test-id">3</td>
               <td class="test-title">owner-orbit
                   
               </td>
-              <td class="test-duration">147</td>
+              <td class="test-duration">141</td>
           </tr>
           </tbody>
       </table>
@@ -592,9 +592,9 @@
     </div>    <div id="coverage">
         <h1>Code Coverage Report</h1>
         <div class="stats high">
-            <div class="percentage">90.55%</div>
-            <div class="sloc">127</div>
-            <div class="hits">115</div>
+            <div class="percentage">91.04%</div>
+            <div class="sloc">134</div>
+            <div class="hits">122</div>
             <div class="misses">12</div>
         </div>
         <div id="filters">
@@ -605,9 +605,9 @@
             <div class="file ">
                 <h2 id="mail.js">mail.js </h2>
                 <div class="stats high">
-                    <div class="percentage">90.55%</div>
-                    <div class="sloc">127</div>
-                    <div class="hits">115</div>
+                    <div class="percentage">91.04%</div>
+                    <div class="sloc">134</div>
+                    <div class="hits">122</div>
                     <div class="misses">12</div>
                 </div>
                 <table>
@@ -654,38 +654,38 @@
                         </tr>            <tr id="mail.js__6" class="hit">
                           <td class="line" data-tooltip>6</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>1</td>
-                          <td class="source">module.exports &#x3D; mail</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source"></td>
                           
                         </tr>            <tr id="mail.js__7" class="hit">
                           <td class="line" data-tooltip>7</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip>1</td>
-                          <td class="source">module.exports.defaults &#x3D; {</td>
+                          <td class="source">module.exports &#x3D; mail</td>
                           
                         </tr>            <tr id="mail.js__8" class="hit">
                           <td class="line" data-tooltip>8</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">  test: false,</td>
+                          <td class="hits" data-tooltip>1</td>
+                          <td class="source">module.exports.defaults &#x3D; ({Joi})&#x3D;&gt;({</td>
                           
                         </tr>            <tr id="mail.js__9" class="hit">
                           <td class="line" data-tooltip>9</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">  history: true,</td>
+                          <td class="source"></td>
                           
                         </tr>            <tr id="mail.js__10" class="hit">
                           <td class="line" data-tooltip>10</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">  makehist: ()&#x3D;&gt;{},</td>
+                          <td class="source">  test: Joi.boolean().default(false)</td>
                           
                         </tr>            <tr id="mail.js__11" class="hit">
                           <td class="line" data-tooltip>11</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">  logmail: true,</td>
+                          <td class="source">    .description(&#x27;Test mode.&#x27;),</td>
                           
                         </tr>            <tr id="mail.js__12" class="hit">
                           <td class="line" data-tooltip>12</td>
@@ -697,109 +697,109 @@
                           <td class="line" data-tooltip>13</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">  // options for nodemailer</td>
+                          <td class="source">  history: Joi.boolean().default(true)</td>
                           
                         </tr>            <tr id="mail.js__14" class="hit">
                           <td class="line" data-tooltip>14</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">  email: {</td>
+                          <td class="source">    .description(&#x27;Save mail history to sys/mailhist entity.&#x27;),</td>
                           
                         </tr>            <tr id="mail.js__15" class="hit">
                           <td class="line" data-tooltip>15</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">    // NOTE: for safety the default is to not send email</td>
+                          <td class="source">  </td>
                           
                         </tr>            <tr id="mail.js__16" class="hit">
                           <td class="line" data-tooltip>16</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">    send: false,</td>
+                          <td class="source">  makehist: Joi.function().default(()&#x3D;&gt;()&#x3D;&gt;{})</td>
                           
                         </tr>            <tr id="mail.js__17" class="hit">
                           <td class="line" data-tooltip>17</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">    preview: false,</td>
+                          <td class="source">    .description(&#x27;Add properties to sys/mailhist entity.&#x27;),</td>
                           
                         </tr>            <tr id="mail.js__18" class="hit">
                           <td class="line" data-tooltip>18</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">  }</td>
+                          <td class="source">  </td>
                           
                         </tr>            <tr id="mail.js__19" class="hit">
                           <td class="line" data-tooltip>19</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">}</td>
+                          <td class="source">  logmail: Joi.boolean().default(true)</td>
                           
                         </tr>            <tr id="mail.js__20" class="hit">
                           <td class="line" data-tooltip>20</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="source">    .description(&#x27;Log mail sending at info level.&#x27;),</td>
                           
                         </tr>            <tr id="mail.js__21" class="hit">
                           <td class="line" data-tooltip>21</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">function mail(options) {</td>
+                          <td class="source"></td>
                           
                         </tr>            <tr id="mail.js__22" class="hit">
                           <td class="line" data-tooltip>22</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>2</td>
-                          <td class="source">  var seneca &#x3D; this</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">  // options for nodemailer</td>
                           
                         </tr>            <tr id="mail.js__23" class="hit">
                           <td class="line" data-tooltip>23</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>2</td>
-                          <td class="source">  var mailer</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">  email: Joi.object({</td>
                           
                         </tr>            <tr id="mail.js__24" class="hit">
                           <td class="line" data-tooltip>24</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="source">    // NOTE: for safety the default is to not send email</td>
                           
                         </tr>            <tr id="mail.js__25" class="hit">
                           <td class="line" data-tooltip>25</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">  // TODO seneca 4.x with embedded promisify should support this</td>
+                          <td class="source"></td>
                           
                         </tr>            <tr id="mail.js__26" class="hit">
                           <td class="line" data-tooltip>26</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>2</td>
-                          <td class="source">  seneca.depends(&#x27;promisify&#x27;)</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">    send: Joi.boolean().default(false)</td>
                           
                         </tr>            <tr id="mail.js__27" class="hit">
                           <td class="line" data-tooltip>27</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="source">      .description(&#x27;Send email (for safety, off by default).&#x27;),</td>
                           
                         </tr>            <tr id="mail.js__28" class="hit">
                           <td class="line" data-tooltip>28</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>2</td>
-                          <td class="source">  seneca</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">    </td>
                           
                         </tr>            <tr id="mail.js__29" class="hit">
                           <td class="line" data-tooltip>29</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">    .message(&#x27;sys:mail,send:mail&#x27;, send_mail)</td>
+                          <td class="source">    preview: Joi.boolean().default(false)</td>
                           
                         </tr>            <tr id="mail.js__30" class="hit">
                           <td class="line" data-tooltip>30</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">    .message(&#x27;sys:mail,hook:render&#x27;, hook_render)</td>
+                          <td class="source">      .description(&#x27;Preview email.&#x27;),</td>
                           
                         </tr>            <tr id="mail.js__31" class="hit">
                           <td class="line" data-tooltip>31</td>
@@ -810,332 +810,332 @@
                         </tr>            <tr id="mail.js__32" class="hit">
                           <td class="line" data-tooltip>32</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>2</td>
-                          <td class="source">  seneca.prepare(async function() {</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">  }).unknown().default()</td>
                           
                         </tr>            <tr id="mail.js__33" class="hit">
                           <td class="line" data-tooltip>33</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">    var root &#x3D; seneca.root</td>
+                          <td class="source">    .description(&#x27;Options for nodemailer.&#x27;)</td>
                           
                         </tr>            <tr id="mail.js__34" class="hit">
                           <td class="line" data-tooltip>34</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="source">})</td>
                           
                         </tr>            <tr id="mail.js__35" class="hit">
                           <td class="line" data-tooltip>35</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>2</td>
-                          <td class="source">    var email_opts &#x3D; options.email</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source"></td>
                           
                         </tr>            <tr id="mail.js__36" class="hit">
                           <td class="line" data-tooltip>36</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="source">function mail(options) {</td>
                           
                         </tr>            <tr id="mail.js__37" class="hit">
                           <td class="line" data-tooltip>37</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">    // create transport</td>
+                          <td class="hits" data-tooltip>2</td>
+                          <td class="source">  var seneca &#x3D; this</td>
                           
                         </tr>            <tr id="mail.js__38" class="hit">
                           <td class="line" data-tooltip>38</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip>2</td>
-                          <td class="source">    var transport_opts &#x3D; email_opts.transport</td>
+                          <td class="source">  var mailer</td>
                           
-                        </tr>            <tr id="mail.js__39" class="chunks">
+                        </tr>            <tr id="mail.js__39" class="hit">
                           <td class="line" data-tooltip>39</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"><div>    if (</div><div class="miss false" data-tooltip>transport_opts</div><div>) {</div></td>
+                          <td class="source"></td>
                           
-                        </tr>            <tr id="mail.js__40" class="miss">
+                        </tr>            <tr id="mail.js__40" class="hit">
                           <td class="line" data-tooltip>40</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source" data-tooltip>      var transport_maker &#x3D; require(&#x27;nodemailer-&#x27; + transport_opts.name)</td>
+                          <td class="source">  // TODO seneca 4.x with embedded promisify should support this</td>
                           
-                        </tr>            <tr id="mail.js__41" class="miss">
+                        </tr>            <tr id="mail.js__41" class="hit">
                           <td class="line" data-tooltip>41</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source" data-tooltip>      var transport &#x3D; transport_maker(transport_opts.options)</td>
+                          <td class="hits" data-tooltip>2</td>
+                          <td class="source">  seneca.depends(&#x27;promisify&#x27;)</td>
                           
-                        </tr>            <tr id="mail.js__42" class="miss">
+                        </tr>            <tr id="mail.js__42" class="hit">
                           <td class="line" data-tooltip>42</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source" data-tooltip>      email_opts.transport &#x3D; transport</td>
+                          <td class="source"></td>
                           
                         </tr>            <tr id="mail.js__43" class="hit">
                           <td class="line" data-tooltip>43</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">    }</td>
+                          <td class="hits" data-tooltip>2</td>
+                          <td class="source">  seneca</td>
                           
                         </tr>            <tr id="mail.js__44" class="hit">
                           <td class="line" data-tooltip>44</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="source">    .message(&#x27;sys:mail,send:mail&#x27;, send_mail)</td>
                           
                         </tr>            <tr id="mail.js__45" class="hit">
                           <td class="line" data-tooltip>45</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>2</td>
-                          <td class="source">    email_opts.render &#x3D; async (view, content) &#x3D;&gt; {</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">    .message(&#x27;sys:mail,hook:render&#x27;, hook_render)</td>
                           
                         </tr>            <tr id="mail.js__46" class="hit">
                           <td class="line" data-tooltip>46</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">      var orig_code &#x3D; view.split(&#x27;/&#x27;)[0]</td>
+                          <td class="source"></td>
                           
                         </tr>            <tr id="mail.js__47" class="hit">
                           <td class="line" data-tooltip>47</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>12</td>
-                          <td class="source">      var part &#x3D; view.split(&#x27;/&#x27;)[1]</td>
+                          <td class="hits" data-tooltip>2</td>
+                          <td class="source">  seneca.prepare(async function() {</td>
                           
                         </tr>            <tr id="mail.js__48" class="hit">
                           <td class="line" data-tooltip>48</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="source">    var root &#x3D; seneca.root</td>
                           
                         </tr>            <tr id="mail.js__49" class="hit">
                           <td class="line" data-tooltip>49</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>12</td>
-                          <td class="source">      var code &#x3D; null</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source"></td>
                           
                         </tr>            <tr id="mail.js__50" class="hit">
                           <td class="line" data-tooltip>50</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>12</td>
-                          <td class="source">      var owner &#x3D; null</td>
+                          <td class="hits" data-tooltip>2</td>
+                          <td class="source">    var email_opts &#x3D; options.email</td>
                           
                         </tr>            <tr id="mail.js__51" class="hit">
                           <td class="line" data-tooltip>51</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>12</td>
-                          <td class="source">      var orbit &#x3D; null</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source"></td>
                           
                         </tr>            <tr id="mail.js__52" class="hit">
                           <td class="line" data-tooltip>52</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>12</td>
-                          <td class="source">      if (orig_code.includes(&#x27;~&#x27;)) {</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">    // create transport</td>
                           
                         </tr>            <tr id="mail.js__53" class="hit">
                           <td class="line" data-tooltip>53</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>6</td>
-                          <td class="source">        var subcodes &#x3D; orig_code.split(&#x27;~&#x27;)</td>
+                          <td class="hits" data-tooltip>2</td>
+                          <td class="source">    var transport_opts &#x3D; email_opts.transport</td>
                           
-                        </tr>            <tr id="mail.js__54" class="hit">
+                        </tr>            <tr id="mail.js__54" class="chunks">
                           <td class="line" data-tooltip>54</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>6</td>
-                          <td class="source">        code &#x3D; subcodes[0]</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source"><div>    if (</div><div class="miss false" data-tooltip>transport_opts</div><div>) {</div></td>
                           
-                        </tr>            <tr id="mail.js__55" class="hit">
+                        </tr>            <tr id="mail.js__55" class="miss">
                           <td class="line" data-tooltip>55</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>6</td>
-                          <td class="source">        owner &#x3D; subcodes[1]</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source" data-tooltip>      var transport_maker &#x3D; require(&#x27;nodemailer-&#x27; + transport_opts.name)</td>
                           
-                        </tr>            <tr id="mail.js__56" class="hit">
+                        </tr>            <tr id="mail.js__56" class="miss">
                           <td class="line" data-tooltip>56</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>6</td>
-                          <td class="source">        orbit &#x3D; subcodes[2]</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source" data-tooltip>      var transport &#x3D; transport_maker(transport_opts.options)</td>
                           
-                        </tr>            <tr id="mail.js__57" class="hit">
+                        </tr>            <tr id="mail.js__57" class="miss">
                           <td class="line" data-tooltip>57</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">      } else {</td>
+                          <td class="source" data-tooltip>      email_opts.transport &#x3D; transport</td>
                           
                         </tr>            <tr id="mail.js__58" class="hit">
                           <td class="line" data-tooltip>58</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>6</td>
-                          <td class="source">        code &#x3D; orig_code</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">    }</td>
                           
                         </tr>            <tr id="mail.js__59" class="hit">
                           <td class="line" data-tooltip>59</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">      }</td>
+                          <td class="source"></td>
                           
                         </tr>            <tr id="mail.js__60" class="hit">
                           <td class="line" data-tooltip>60</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="hits" data-tooltip>2</td>
+                          <td class="source">    email_opts.render &#x3D; async (view, content) &#x3D;&gt; {</td>
                           
                         </tr>            <tr id="mail.js__61" class="hit">
                           <td class="line" data-tooltip>61</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">      // empty string is an artefact of code format</td>
+                          <td class="source">      var orig_code &#x3D; view.split(&#x27;/&#x27;)[0]</td>
                           
-                        </tr>            <tr id="mail.js__62" class="chunks">
+                        </tr>            <tr id="mail.js__62" class="hit">
                           <td class="line" data-tooltip>62</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source"><div>      owner &#x3D; </div><div class="miss false" data-tooltip>&#x27;&#x27; &#x3D;&#x3D;&#x3D; owner</div><div> ? </div><div class="miss never" data-tooltip>null</div><div> : owner</div></td>
+                          <td class="hits" data-tooltip>12</td>
+                          <td class="source">      var part &#x3D; view.split(&#x27;/&#x27;)[1]</td>
                           
                         </tr>            <tr id="mail.js__63" class="hit">
                           <td class="line" data-tooltip>63</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">      </td>
+                          <td class="source"></td>
                           
                         </tr>            <tr id="mail.js__64" class="hit">
                           <td class="line" data-tooltip>64</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">      // TODO: how to make this action specific?</td>
+                          <td class="hits" data-tooltip>12</td>
+                          <td class="source">      var code &#x3D; null</td>
                           
                         </tr>            <tr id="mail.js__65" class="hit">
                           <td class="line" data-tooltip>65</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip>12</td>
-                          <td class="source">      var res &#x3D; await root.post(&#x27;sys:mail,hook:render&#x27;, {</td>
+                          <td class="source">      var owner &#x3D; null</td>
                           
                         </tr>            <tr id="mail.js__66" class="hit">
                           <td class="line" data-tooltip>66</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">        code,</td>
+                          <td class="hits" data-tooltip>12</td>
+                          <td class="source">      var orbit &#x3D; null</td>
                           
                         </tr>            <tr id="mail.js__67" class="hit">
                           <td class="line" data-tooltip>67</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">        owner,</td>
+                          <td class="hits" data-tooltip>12</td>
+                          <td class="source">      if (orig_code.includes(&#x27;~&#x27;)) {</td>
                           
                         </tr>            <tr id="mail.js__68" class="hit">
                           <td class="line" data-tooltip>68</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">        orbit,</td>
+                          <td class="hits" data-tooltip>6</td>
+                          <td class="source">        var subcodes &#x3D; orig_code.split(&#x27;~&#x27;)</td>
                           
                         </tr>            <tr id="mail.js__69" class="hit">
                           <td class="line" data-tooltip>69</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">        part,</td>
+                          <td class="hits" data-tooltip>6</td>
+                          <td class="source">        code &#x3D; subcodes[0]</td>
                           
                         </tr>            <tr id="mail.js__70" class="hit">
                           <td class="line" data-tooltip>70</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">        content</td>
+                          <td class="hits" data-tooltip>6</td>
+                          <td class="source">        owner &#x3D; subcodes[1]</td>
                           
                         </tr>            <tr id="mail.js__71" class="hit">
                           <td class="line" data-tooltip>71</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">      })</td>
+                          <td class="hits" data-tooltip>6</td>
+                          <td class="source">        orbit &#x3D; subcodes[2]</td>
                           
                         </tr>            <tr id="mail.js__72" class="hit">
                           <td class="line" data-tooltip>72</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="source">      } else {</td>
                           
                         </tr>            <tr id="mail.js__73" class="hit">
                           <td class="line" data-tooltip>73</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="hits" data-tooltip>6</td>
+                          <td class="source">        code &#x3D; orig_code</td>
                           
-                        </tr>            <tr id="mail.js__74" class="chunks">
+                        </tr>            <tr id="mail.js__74" class="hit">
                           <td class="line" data-tooltip>74</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"><div>      if(</div><div class="miss false" data-tooltip>null &#x3D;&#x3D; res</div><div>) {</div></td>
+                          <td class="source">      }</td>
                           
-                        </tr>            <tr id="mail.js__75" class="miss">
+                        </tr>            <tr id="mail.js__75" class="hit">
                           <td class="line" data-tooltip>75</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source" data-tooltip>        return null</td>
+                          <td class="source"></td>
                           
                         </tr>            <tr id="mail.js__76" class="hit">
                           <td class="line" data-tooltip>76</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">      }</td>
+                          <td class="source">      // empty string is an artefact of code format</td>
                           
-                        </tr>            <tr id="mail.js__77" class="hit">
+                        </tr>            <tr id="mail.js__77" class="chunks">
                           <td class="line" data-tooltip>77</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="source"><div>      owner &#x3D; </div><div class="miss false" data-tooltip>&#x27;&#x27; &#x3D;&#x3D;&#x3D; owner</div><div> ? </div><div class="miss never" data-tooltip>null</div><div> : owner</div></td>
                           
-                        </tr>            <tr id="mail.js__78" class="chunks">
+                        </tr>            <tr id="mail.js__78" class="hit">
                           <td class="line" data-tooltip>78</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"><div>      if(</div><div class="miss false" data-tooltip>false &#x3D;&#x3D;&#x3D; res.ok</div><div>) {</div></td>
+                          <td class="source">      </td>
                           
-                        </tr>            <tr id="mail.js__79" class="miss">
+                        </tr>            <tr id="mail.js__79" class="hit">
                           <td class="line" data-tooltip>79</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source" data-tooltip>        throw new Error(&#x27;mail-render-failed: &#x27;+(res ? res.why : &#x27;unknown&#x27;))</td>
+                          <td class="source">      // TODO: how to make this action specific?</td>
                           
                         </tr>            <tr id="mail.js__80" class="hit">
                           <td class="line" data-tooltip>80</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">      }</td>
+                          <td class="hits" data-tooltip>12</td>
+                          <td class="source">      var res &#x3D; await root.post(&#x27;sys:mail,hook:render&#x27;, {</td>
                           
                         </tr>            <tr id="mail.js__81" class="hit">
                           <td class="line" data-tooltip>81</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">      </td>
+                          <td class="source">        code,</td>
                           
                         </tr>            <tr id="mail.js__82" class="hit">
                           <td class="line" data-tooltip>82</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>12</td>
-                          <td class="source">      var out &#x3D; res[part]</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">        owner,</td>
                           
                         </tr>            <tr id="mail.js__83" class="hit">
                           <td class="line" data-tooltip>83</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="source">        orbit,</td>
                           
                         </tr>            <tr id="mail.js__84" class="hit">
                           <td class="line" data-tooltip>84</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>12</td>
-                          <td class="source">      if (&#x27;html&#x27; &#x3D;&#x3D;&#x3D; part) {</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">        part,</td>
                           
                         </tr>            <tr id="mail.js__85" class="hit">
                           <td class="line" data-tooltip>85</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>4</td>
-                          <td class="source">        out &#x3D; await mailer.juiceResources(out)</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">        content</td>
                           
                         </tr>            <tr id="mail.js__86" class="hit">
                           <td class="line" data-tooltip>86</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">      }</td>
+                          <td class="source">      })</td>
                           
                         </tr>            <tr id="mail.js__87" class="hit">
                           <td class="line" data-tooltip>87</td>
@@ -1146,122 +1146,122 @@
                         </tr>            <tr id="mail.js__88" class="hit">
                           <td class="line" data-tooltip>88</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>12</td>
-                          <td class="source">      return out</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source"></td>
                           
-                        </tr>            <tr id="mail.js__89" class="hit">
+                        </tr>            <tr id="mail.js__89" class="chunks">
                           <td class="line" data-tooltip>89</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">    }</td>
+                          <td class="source"><div>      if(</div><div class="miss false" data-tooltip>null &#x3D;&#x3D; res</div><div>) {</div></td>
                           
-                        </tr>            <tr id="mail.js__90" class="hit">
+                        </tr>            <tr id="mail.js__90" class="miss">
                           <td class="line" data-tooltip>90</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="source" data-tooltip>        return null</td>
                           
                         </tr>            <tr id="mail.js__91" class="hit">
                           <td class="line" data-tooltip>91</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>2</td>
-                          <td class="source">    mailer &#x3D; new Email(email_opts)</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">      }</td>
                           
                         </tr>            <tr id="mail.js__92" class="hit">
                           <td class="line" data-tooltip>92</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">  })</td>
+                          <td class="source"></td>
                           
-                        </tr>            <tr id="mail.js__93" class="hit">
+                        </tr>            <tr id="mail.js__93" class="chunks">
                           <td class="line" data-tooltip>93</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="source"><div>      if(</div><div class="miss false" data-tooltip>false &#x3D;&#x3D;&#x3D; res.ok</div><div>) {</div></td>
                           
-                        </tr>            <tr id="mail.js__94" class="hit">
+                        </tr>            <tr id="mail.js__94" class="miss">
                           <td class="line" data-tooltip>94</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">  async function send_mail(msg, meta) {</td>
+                          <td class="source" data-tooltip>        throw new Error(&#x27;mail-render-failed: &#x27;+(res ? res.why : &#x27;unknown&#x27;))</td>
                           
                         </tr>            <tr id="mail.js__95" class="hit">
                           <td class="line" data-tooltip>95</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>4</td>
-                          <td class="source">    var content &#x3D; msg.content</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">      }</td>
                           
                         </tr>            <tr id="mail.js__96" class="hit">
                           <td class="line" data-tooltip>96</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="source">      </td>
                           
                         </tr>            <tr id="mail.js__97" class="hit">
                           <td class="line" data-tooltip>97</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">    // Template format is code~owner~orbit</td>
+                          <td class="hits" data-tooltip>12</td>
+                          <td class="source">      var out &#x3D; res[part]</td>
                           
                         </tr>            <tr id="mail.js__98" class="hit">
                           <td class="line" data-tooltip>98</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>4</td>
-                          <td class="source">    var template &#x3D; msg.code</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source"></td>
                           
                         </tr>            <tr id="mail.js__99" class="hit">
                           <td class="line" data-tooltip>99</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>4</td>
-                          <td class="source">    if (null !&#x3D; msg.owner) {</td>
+                          <td class="hits" data-tooltip>12</td>
+                          <td class="source">      if (&#x27;html&#x27; &#x3D;&#x3D;&#x3D; part) {</td>
                           
                         </tr>            <tr id="mail.js__100" class="hit">
                           <td class="line" data-tooltip>100</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>2</td>
-                          <td class="source">      template &#x3D; template + &#x27;~&#x27; + msg.owner</td>
+                          <td class="hits" data-tooltip>4</td>
+                          <td class="source">        out &#x3D; await mailer.juiceResources(out)</td>
                           
                         </tr>            <tr id="mail.js__101" class="hit">
                           <td class="line" data-tooltip>101</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">    }</td>
+                          <td class="source">      }</td>
                           
                         </tr>            <tr id="mail.js__102" class="hit">
                           <td class="line" data-tooltip>102</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>4</td>
-                          <td class="source">    if (null !&#x3D; msg.orbit) {</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source"></td>
                           
                         </tr>            <tr id="mail.js__103" class="hit">
                           <td class="line" data-tooltip>103</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>1</td>
-                          <td class="source">      template &#x3D; template +</td>
+                          <td class="hits" data-tooltip>12</td>
+                          <td class="source">      return out</td>
                           
                         </tr>            <tr id="mail.js__104" class="hit">
                           <td class="line" data-tooltip>104</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">        // NOTE: empty owner may be needed</td>
+                          <td class="source">    }</td>
                           
-                        </tr>            <tr id="mail.js__105" class="chunks">
+                        </tr>            <tr id="mail.js__105" class="hit">
                           <td class="line" data-tooltip>105</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"><div>        (</div><div class="miss true" data-tooltip>null !&#x3D; msg.owner</div><div> ? &#x27;&#x27; : </div><div class="miss never" data-tooltip>&#x27;~&#x27;</div><div> ) +</div></td>
+                          <td class="source"></td>
                           
                         </tr>            <tr id="mail.js__106" class="hit">
                           <td class="line" data-tooltip>106</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">        &#x27;~&#x27; + msg.orbit</td>
+                          <td class="hits" data-tooltip>2</td>
+                          <td class="source">    mailer &#x3D; new Email(email_opts)</td>
                           
                         </tr>            <tr id="mail.js__107" class="hit">
                           <td class="line" data-tooltip>107</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">    }</td>
+                          <td class="source">  })</td>
                           
                         </tr>            <tr id="mail.js__108" class="hit">
                           <td class="line" data-tooltip>108</td>
@@ -1272,359 +1272,449 @@
                         </tr>            <tr id="mail.js__109" class="hit">
                           <td class="line" data-tooltip>109</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>4</td>
-                          <td class="source">    var mail_opts &#x3D; {</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">  async function send_mail(msg, meta) {</td>
                           
                         </tr>            <tr id="mail.js__110" class="hit">
                           <td class="line" data-tooltip>110</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">      template,</td>
+                          <td class="hits" data-tooltip>4</td>
+                          <td class="source">    var content &#x3D; msg.content</td>
                           
                         </tr>            <tr id="mail.js__111" class="hit">
                           <td class="line" data-tooltip>111</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">      message: {</td>
+                          <td class="source"></td>
                           
                         </tr>            <tr id="mail.js__112" class="hit">
                           <td class="line" data-tooltip>112</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">        to: msg.to,</td>
+                          <td class="source">    // Template format is code~owner~orbit</td>
                           
                         </tr>            <tr id="mail.js__113" class="hit">
                           <td class="line" data-tooltip>113</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">        from: msg.from,</td>
+                          <td class="hits" data-tooltip>4</td>
+                          <td class="source">    var template &#x3D; msg.code</td>
                           
                         </tr>            <tr id="mail.js__114" class="hit">
                           <td class="line" data-tooltip>114</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">        subject: msg.subject</td>
+                          <td class="hits" data-tooltip>4</td>
+                          <td class="source">    if (null !&#x3D; msg.owner) {</td>
                           
                         </tr>            <tr id="mail.js__115" class="hit">
                           <td class="line" data-tooltip>115</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">      },</td>
+                          <td class="hits" data-tooltip>2</td>
+                          <td class="source">      template &#x3D; template + &#x27;~&#x27; + msg.owner</td>
                           
                         </tr>            <tr id="mail.js__116" class="hit">
                           <td class="line" data-tooltip>116</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">      locals: content</td>
+                          <td class="source">    }</td>
                           
                         </tr>            <tr id="mail.js__117" class="hit">
                           <td class="line" data-tooltip>117</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">    }</td>
+                          <td class="hits" data-tooltip>4</td>
+                          <td class="source">    if (null !&#x3D; msg.orbit) {</td>
                           
                         </tr>            <tr id="mail.js__118" class="hit">
                           <td class="line" data-tooltip>118</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="hits" data-tooltip>1</td>
+                          <td class="source">      template &#x3D; template +</td>
                           
                         </tr>            <tr id="mail.js__119" class="hit">
                           <td class="line" data-tooltip>119</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>4</td>
-                          <td class="source">    var sent &#x3D; await mailer.send(mail_opts)</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">        // NOTE: empty owner may be needed</td>
                           
-                        </tr>            <tr id="mail.js__120" class="hit">
+                        </tr>            <tr id="mail.js__120" class="chunks">
                           <td class="line" data-tooltip>120</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="source"><div>        (</div><div class="miss true" data-tooltip>null !&#x3D; msg.owner</div><div> ? &#x27;&#x27; : </div><div class="miss never" data-tooltip>&#x27;~&#x27;</div><div> ) +</div></td>
                           
                         </tr>            <tr id="mail.js__121" class="hit">
                           <td class="line" data-tooltip>121</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>4</td>
-                          <td class="source">    var savehist &#x3D;</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">        &#x27;~&#x27; + msg.orbit</td>
                           
-                        </tr>            <tr id="mail.js__122" class="chunks">
+                        </tr>            <tr id="mail.js__122" class="hit">
                           <td class="line" data-tooltip>122</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"><div>        (options.history &amp;&amp; </div><div class="miss true" data-tooltip>false !&#x3D;&#x3D; msg.history</div><div>) ||</div></td>
+                          <td class="source">    }</td>
                           
-                        </tr>            <tr id="mail.js__123" class="chunks">
+                        </tr>            <tr id="mail.js__123" class="hit">
                           <td class="line" data-tooltip>123</td>
-                          <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source"><div>        (</div><div class="miss true" data-tooltip>!options.history</div><div> &amp;&amp; </div><div class="miss false" data-tooltip>true &#x3D;&#x3D;&#x3D; msg.history</div><div>)</div></td>
-                          
-                        </tr>            <tr id="mail.js__124" class="hit">
-                          <td class="line" data-tooltip>124</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
                           <td class="source"></td>
                           
+                        </tr>            <tr id="mail.js__124" class="hit">
+                          <td class="line" data-tooltip>124</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip>4</td>
+                          <td class="source">    var mail_opts &#x3D; {</td>
+                          
                         </tr>            <tr id="mail.js__125" class="hit">
                           <td class="line" data-tooltip>125</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>4</td>
-                          <td class="source">    var when &#x3D; Date.now()</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">      template,</td>
                           
                         </tr>            <tr id="mail.js__126" class="hit">
                           <td class="line" data-tooltip>126</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">    </td>
+                          <td class="source">      message: {</td>
                           
                         </tr>            <tr id="mail.js__127" class="hit">
                           <td class="line" data-tooltip>127</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>4</td>
-                          <td class="source">    if(savehist) {</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">        to: msg.to,</td>
                           
                         </tr>            <tr id="mail.js__128" class="hit">
                           <td class="line" data-tooltip>128</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">      // do not wait</td>
+                          <td class="source">        from: msg.from,</td>
                           
                         </tr>            <tr id="mail.js__129" class="hit">
                           <td class="line" data-tooltip>129</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>2</td>
-                          <td class="source">      seneca.entity(&#x27;sys/mailhist&#x27;).data$({</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">        subject: msg.subject</td>
                           
                         </tr>            <tr id="mail.js__130" class="hit">
                           <td class="line" data-tooltip>130</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">        ...msg,</td>
+                          <td class="source">      },</td>
                           
                         </tr>            <tr id="mail.js__131" class="hit">
                           <td class="line" data-tooltip>131</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">        template,</td>
+                          <td class="source">      locals: content</td>
                           
                         </tr>            <tr id="mail.js__132" class="hit">
                           <td class="line" data-tooltip>132</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">        when,</td>
+                          <td class="source">    }</td>
                           
                         </tr>            <tr id="mail.js__133" class="hit">
                           <td class="line" data-tooltip>133</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">        sent,</td>
+                          <td class="source"></td>
                           
                         </tr>            <tr id="mail.js__134" class="hit">
                           <td class="line" data-tooltip>134</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">        mid: sent.messageId,</td>
+                          <td class="hits" data-tooltip>4</td>
+                          <td class="source">    var sent &#x3D; await mailer.send(mail_opts)</td>
                           
                         </tr>            <tr id="mail.js__135" class="hit">
                           <td class="line" data-tooltip>135</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">        ...options.makehist({msg, meta, template, sent, when})</td>
+                          <td class="source"></td>
                           
                         </tr>            <tr id="mail.js__136" class="hit">
                           <td class="line" data-tooltip>136</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">      }).save$()</td>
+                          <td class="hits" data-tooltip>4</td>
+                          <td class="source">    var savehist &#x3D;</td>
                           
-                        </tr>            <tr id="mail.js__137" class="hit">
+                        </tr>            <tr id="mail.js__137" class="chunks">
                           <td class="line" data-tooltip>137</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">    }</td>
+                          <td class="source"><div>        (options.history &amp;&amp; </div><div class="miss true" data-tooltip>false !&#x3D;&#x3D; msg.history</div><div>) ||</div></td>
                           
-                        </tr>            <tr id="mail.js__138" class="hit">
+                        </tr>            <tr id="mail.js__138" class="chunks">
                           <td class="line" data-tooltip>138</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="source"><div>        (</div><div class="miss true" data-tooltip>!options.history</div><div> &amp;&amp; </div><div class="miss false" data-tooltip>true &#x3D;&#x3D;&#x3D; msg.history</div><div>)</div></td>
                           
                         </tr>            <tr id="mail.js__139" class="hit">
                           <td class="line" data-tooltip>139</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>4</td>
-                          <td class="source">    if(options.logmail) {</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source"></td>
                           
                         </tr>            <tr id="mail.js__140" class="hit">
                           <td class="line" data-tooltip>140</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>2</td>
-                          <td class="source">      seneca.log.info({</td>
+                          <td class="hits" data-tooltip>4</td>
+                          <td class="source">    var when &#x3D; Date.now()</td>
                           
                         </tr>            <tr id="mail.js__141" class="hit">
                           <td class="line" data-tooltip>141</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">        notice: &#x27;email-sent&#x27;,</td>
+                          <td class="source">    </td>
                           
                         </tr>            <tr id="mail.js__142" class="hit">
                           <td class="line" data-tooltip>142</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">        data: {</td>
+                          <td class="hits" data-tooltip>4</td>
+                          <td class="source">    if(savehist) {</td>
                           
                         </tr>            <tr id="mail.js__143" class="hit">
                           <td class="line" data-tooltip>143</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">          ...msg,</td>
+                          <td class="source">      // do not wait</td>
                           
                         </tr>            <tr id="mail.js__144" class="hit">
                           <td class="line" data-tooltip>144</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">          template,</td>
+                          <td class="hits" data-tooltip>2</td>
+                          <td class="source">      seneca.entity(&#x27;sys/mailhist&#x27;).data$({</td>
                           
                         </tr>            <tr id="mail.js__145" class="hit">
                           <td class="line" data-tooltip>145</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">          when,</td>
+                          <td class="source">        ...msg,</td>
                           
                         </tr>            <tr id="mail.js__146" class="hit">
                           <td class="line" data-tooltip>146</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">          mid: sent.messageId</td>
+                          <td class="source">        template,</td>
                           
                         </tr>            <tr id="mail.js__147" class="hit">
                           <td class="line" data-tooltip>147</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">        }</td>
+                          <td class="source">        when,</td>
                           
                         </tr>            <tr id="mail.js__148" class="hit">
                           <td class="line" data-tooltip>148</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">      })</td>
+                          <td class="source">        sent,</td>
                           
                         </tr>            <tr id="mail.js__149" class="hit">
                           <td class="line" data-tooltip>149</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">    }</td>
+                          <td class="source">        mid: sent.messageId,</td>
                           
                         </tr>            <tr id="mail.js__150" class="hit">
                           <td class="line" data-tooltip>150</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">    </td>
+                          <td class="source">        ...options.makehist({msg, meta, template, sent, when})</td>
                           
                         </tr>            <tr id="mail.js__151" class="hit">
                           <td class="line" data-tooltip>151</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>4</td>
-                          <td class="source">    return {</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">      }).save$()</td>
                           
                         </tr>            <tr id="mail.js__152" class="hit">
                           <td class="line" data-tooltip>152</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">      msg,</td>
+                          <td class="source">    }</td>
                           
                         </tr>            <tr id="mail.js__153" class="hit">
                           <td class="line" data-tooltip>153</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">      sent,</td>
+                          <td class="source"></td>
                           
                         </tr>            <tr id="mail.js__154" class="hit">
                           <td class="line" data-tooltip>154</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">      template</td>
+                          <td class="hits" data-tooltip>4</td>
+                          <td class="source">    if(options.logmail) {</td>
                           
                         </tr>            <tr id="mail.js__155" class="hit">
                           <td class="line" data-tooltip>155</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">    }</td>
+                          <td class="hits" data-tooltip>2</td>
+                          <td class="source">      seneca.log.info({</td>
                           
                         </tr>            <tr id="mail.js__156" class="hit">
                           <td class="line" data-tooltip>156</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">  }</td>
+                          <td class="source">        notice: &#x27;email-sent&#x27;,</td>
                           
                         </tr>            <tr id="mail.js__157" class="hit">
                           <td class="line" data-tooltip>157</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source"></td>
+                          <td class="source">        data: {</td>
                           
                         </tr>            <tr id="mail.js__158" class="hit">
                           <td class="line" data-tooltip>158</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">  async function hook_render(msg) {</td>
+                          <td class="source">          ...msg,</td>
                           
                         </tr>            <tr id="mail.js__159" class="hit">
                           <td class="line" data-tooltip>159</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip>3</td>
-                          <td class="source">    return {</td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">          template,</td>
                           
                         </tr>            <tr id="mail.js__160" class="hit">
                           <td class="line" data-tooltip>160</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">      html:</td>
+                          <td class="source">          when,</td>
                           
                         </tr>            <tr id="mail.js__161" class="hit">
                           <td class="line" data-tooltip>161</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">        &#x27;NO RENDER DEFINED FOR &#x27; +</td>
+                          <td class="source">          mid: sent.messageId</td>
                           
                         </tr>            <tr id="mail.js__162" class="hit">
                           <td class="line" data-tooltip>162</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">        msg.code +</td>
+                          <td class="source">        }</td>
                           
                         </tr>            <tr id="mail.js__163" class="hit">
                           <td class="line" data-tooltip>163</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">        &#x27;, content was: &#x27; +</td>
+                          <td class="source">      })</td>
                           
                         </tr>            <tr id="mail.js__164" class="hit">
                           <td class="line" data-tooltip>164</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">        JSON.stringify(msg.content)</td>
+                          <td class="source">    }</td>
                           
                         </tr>            <tr id="mail.js__165" class="hit">
                           <td class="line" data-tooltip>165</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">    }</td>
+                          <td class="source">    </td>
                           
                         </tr>            <tr id="mail.js__166" class="hit">
                           <td class="line" data-tooltip>166</td>
                           <td class="lint empty"></td>
-                          <td class="hits" data-tooltip></td>
-                          <td class="source">  }</td>
+                          <td class="hits" data-tooltip>4</td>
+                          <td class="source">    return {</td>
                           
                         </tr>            <tr id="mail.js__167" class="hit">
                           <td class="line" data-tooltip>167</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
-                          <td class="source">}</td>
+                          <td class="source">      msg,</td>
                           
                         </tr>            <tr id="mail.js__168" class="hit">
                           <td class="line" data-tooltip>168</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">      sent,</td>
+                          
+                        </tr>            <tr id="mail.js__169" class="hit">
+                          <td class="line" data-tooltip>169</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">      template</td>
+                          
+                        </tr>            <tr id="mail.js__170" class="hit">
+                          <td class="line" data-tooltip>170</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">    }</td>
+                          
+                        </tr>            <tr id="mail.js__171" class="hit">
+                          <td class="line" data-tooltip>171</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">  }</td>
+                          
+                        </tr>            <tr id="mail.js__172" class="hit">
+                          <td class="line" data-tooltip>172</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source"></td>
+                          
+                        </tr>            <tr id="mail.js__173" class="hit">
+                          <td class="line" data-tooltip>173</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">  async function hook_render(msg) {</td>
+                          
+                        </tr>            <tr id="mail.js__174" class="hit">
+                          <td class="line" data-tooltip>174</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip>3</td>
+                          <td class="source">    return {</td>
+                          
+                        </tr>            <tr id="mail.js__175" class="hit">
+                          <td class="line" data-tooltip>175</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">      html:</td>
+                          
+                        </tr>            <tr id="mail.js__176" class="hit">
+                          <td class="line" data-tooltip>176</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">        &#x27;NO RENDER DEFINED FOR &#x27; +</td>
+                          
+                        </tr>            <tr id="mail.js__177" class="hit">
+                          <td class="line" data-tooltip>177</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">        msg.code +</td>
+                          
+                        </tr>            <tr id="mail.js__178" class="hit">
+                          <td class="line" data-tooltip>178</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">        &#x27;, content was: &#x27; +</td>
+                          
+                        </tr>            <tr id="mail.js__179" class="hit">
+                          <td class="line" data-tooltip>179</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">        JSON.stringify(msg.content)</td>
+                          
+                        </tr>            <tr id="mail.js__180" class="hit">
+                          <td class="line" data-tooltip>180</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">    }</td>
+                          
+                        </tr>            <tr id="mail.js__181" class="hit">
+                          <td class="line" data-tooltip>181</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">  }</td>
+                          
+                        </tr>            <tr id="mail.js__182" class="hit">
+                          <td class="line" data-tooltip>182</td>
+                          <td class="lint empty"></td>
+                          <td class="hits" data-tooltip></td>
+                          <td class="source">}</td>
+                          
+                        </tr>            <tr id="mail.js__183" class="hit">
+                          <td class="line" data-tooltip>183</td>
                           <td class="lint empty"></td>
                           <td class="hits" data-tooltip></td>
                           <td class="source"></td>

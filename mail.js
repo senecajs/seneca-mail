@@ -3,20 +3,36 @@
 
 const Email = require('email-templates')
 
+
 module.exports = mail
-module.exports.defaults = {
-  test: false,
-  history: true,
-  makehist: ()=>{},
-  logmail: true,
+module.exports.defaults = ({Joi})=>({
+
+  test: Joi.boolean().default(false)
+    .description('Test mode.'),
+
+  history: Joi.boolean().default(true)
+    .description('Save mail history to `sys/mailhist` entity.'),
+
+  // NOTE: Joi function default must be returned from a default maker function
+  makehist: Joi.function().default(()=>()=>{})
+    .description('Add properties to `sys/mailhist` entity.'),
+  
+  logmail: Joi.boolean().default(true)
+    .description('Log mail sending at info level.'),
 
   // options for nodemailer
-  email: {
+  email: Joi.object({
     // NOTE: for safety the default is to not send email
-    send: false,
-    preview: false,
-  }
-}
+
+    send: Joi.boolean().default(false)
+      .description('Send email (for safety, off by default).'),
+    
+    preview: Joi.boolean().default(false)
+      .description('Preview email.'),
+
+  }).unknown().default()
+    .description('Options for nodemailer.')
+})
 
 function mail(options) {
   var seneca = this
