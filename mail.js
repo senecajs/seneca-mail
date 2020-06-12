@@ -6,10 +6,15 @@ const Email = require('email-templates')
 module.exports = mail
 module.exports.defaults = {
   test: false,
+  history: true,
+  makehist: ()=>{},
+  logmail: true,
+
+  // options for nodemailer
   email: {
     // NOTE: for safety the default is to not send email
     send: false,
-    preview: false
+    preview: false,
   }
 }
 
@@ -53,6 +58,9 @@ function mail(options) {
         code = orig_code
       }
 
+      // empty string is an artefact of code format
+      owner = '' === owner ? null : owner
+      
       // TODO: how to make this action specific?
       var res = await root.post('sys:mail,hook:render', {
         code,
@@ -62,7 +70,16 @@ function mail(options) {
         content
       })
 
-      var out = res && res[part]
+
+      if(null == res) {
+        return null
+      }
+
+      if(false === res.ok) {
+        throw new Error('mail-render-failed: '+(res ? res.why : 'unknown'))
+      }
+      
+      var out = res[part]
 
       if ('html' === part) {
         out = await mailer.juiceResources(out)
@@ -74,15 +91,19 @@ function mail(options) {
     mailer = new Email(email_opts)
   })
 
-  async function send_mail(msg) {
+  async function send_mail(msg, meta) {
     var content = msg.content
 
+    // Template format is code~owner~orbit
     var template = msg.code
     if (null != msg.owner) {
       template = template + '~' + msg.owner
     }
     if (null != msg.orbit) {
-      template = template + '~' + msg.orbit
+      template = template +
+        // NOTE: empty owner may be needed
+        (null != msg.owner ? '' : '~' ) +
+        '~' + msg.orbit
     }
 
     var mail_opts = {
@@ -95,12 +116,42 @@ function mail(options) {
       locals: content
     }
 
-    var res = await mailer.send(mail_opts)
+    var sent = await mailer.send(mail_opts)
 
+    var savehist =
+        (options.history && false !== msg.history) ||
+        (!options.history && true === msg.history)
+
+    var when = Date.now()
+    
+    if(savehist) {
+      // do not wait
+      seneca.entity('sys/mailhist').data$({
+        ...msg,
+        template,
+        when,
+        sent,
+        mid: sent.messageId,
+        ...options.makehist({msg, meta, template, sent, when})
+      }).save$()
+    }
+
+    if(options.logmail) {
+      seneca.log.info({
+        notice: 'email-sent',
+        data: {
+          ...msg,
+          template,
+          when,
+          mid: sent.messageId
+        }
+      })
+    }
+    
     return {
-      msg: msg,
-      sent: res,
-      template: template
+      msg,
+      sent,
+      template
     }
   }
 

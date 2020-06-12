@@ -46,7 +46,10 @@ lab.test('happy', async () => {
 })
 
 lab.test('owner-orbit', async () => {
-  var si = await seneca_instance().ready()
+  var si = await seneca_instance({legacy:false},{
+    history: false,
+    logmail: false,
+  }).ready()
   var address = 'bob@example.com'
   var res
 
@@ -92,5 +95,6 @@ function seneca_instance(seneca_options, plugin_options) {
   return Seneca(seneca_options, { legacy: { transport: false } })
     .test()
     .use('promisify')
+    .use('entity')
     .use(Plugin, plugin_options)
 }
