@@ -45,7 +45,7 @@ lab.test('happy', async () => {
   expect(res.sent.message).includes('Foo BarraB ooF')
 })
 
-lab.test('owner', async () => {
+lab.test('owner-orbit', async () => {
   var si = await seneca_instance().ready()
   var address = 'bob@example.com'
   var res
@@ -59,6 +59,7 @@ lab.test('owner', async () => {
   res = await si.post('sys:mail,send:mail', {
     code: 'foo',
     owner: 'o01',
+    orbit: 'zed',
     to: address,
     content: {
       foo: 'FOO'
@@ -67,8 +68,11 @@ lab.test('owner', async () => {
 
   expect(res.msg.code).equals('foo')
   expect(res.msg.owner).equals('o01')
+  expect(res.msg.orbit).equals('zed')
+  expect(res.template).equals('foo~o01~zed')
   expect(res.sent.message).includes('Owner01 FOO')
 
+  
   res = await si.post('sys:mail,send:mail', {
     code: 'foo',
     owner: 'o02',
@@ -80,6 +84,8 @@ lab.test('owner', async () => {
 
   expect(res.msg.code).equals('foo')
   expect(res.msg.owner).equals('o02')
+  expect(res.msg.orbit).not.exists()
+  expect(res.template).equals('foo~o02')
   expect(res.sent.message).includes('Owner02 FOO')
 })
 

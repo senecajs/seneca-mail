@@ -43,9 +43,12 @@ function mail(options) {
 
       var code = null
       var owner = null
+      var orbit = null
       if (orig_code.includes('~')) {
-        code = orig_code.split('~')[0]
-        owner = orig_code.split('~')[1]
+        var subcodes = orig_code.split('~')
+        code = subcodes[0]
+        owner = subcodes[1]
+        orbit = subcodes[2]
       } else {
         code = orig_code
       }
@@ -54,6 +57,7 @@ function mail(options) {
       var res = await root.post('sys:mail,hook:render', {
         code,
         owner,
+        orbit,
         part,
         content
       })
@@ -77,6 +81,9 @@ function mail(options) {
     if (null != msg.owner) {
       template = template + '~' + msg.owner
     }
+    if (null != msg.orbit) {
+      template = template + '~' + msg.orbit
+    }
 
     var mail_opts = {
       template,
@@ -92,7 +99,8 @@ function mail(options) {
 
     return {
       msg: msg,
-      sent: res
+      sent: res,
+      template: template
     }
   }
 
