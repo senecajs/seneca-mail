@@ -46,10 +46,13 @@ lab.test('happy', async () => {
 })
 
 lab.test('owner-orbit', async () => {
-  var si = await seneca_instance({legacy:false},{
-    history: false,
-    logmail: false,
-  }).ready()
+  var si = await seneca_instance(
+    { legacy: false },
+    {
+      history: false,
+      logmail: false
+    }
+  ).ready()
   var address = 'bob@example.com'
   var res
 

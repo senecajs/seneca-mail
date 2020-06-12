@@ -3,34 +3,39 @@
 
 const Email = require('email-templates')
 
-
 module.exports = mail
-module.exports.defaults = ({Joi})=>({
-
-  test: Joi.boolean().default(false)
+module.exports.defaults = ({ Joi }) => ({
+  test: Joi.boolean()
+    .default(false)
     .description('Test mode.'),
 
-  history: Joi.boolean().default(true)
+  history: Joi.boolean()
+    .default(true)
     .description('Save mail history to `sys/mailhist` entity.'),
 
   // NOTE: Joi function default must be returned from a default maker function
-  makehist: Joi.function().default(()=>()=>{})
+  makehist: Joi.function()
+    .default(() => () => {})
     .description('Add properties to `sys/mailhist` entity.'),
-  
-  logmail: Joi.boolean().default(true)
+
+  logmail: Joi.boolean()
+    .default(true)
     .description('Log mail sending at info level.'),
 
   // options for nodemailer
   email: Joi.object({
     // NOTE: for safety the default is to not send email
 
-    send: Joi.boolean().default(false)
+    send: Joi.boolean()
+      .default(false)
       .description('Send email (for safety, off by default).'),
-    
-    preview: Joi.boolean().default(false)
-      .description('Preview email.'),
 
-  }).unknown().default()
+    preview: Joi.boolean()
+      .default(false)
+      .description('Preview email.')
+  })
+    .unknown()
+    .default()
     .description('Options for nodemailer.')
 })
 
@@ -76,7 +81,7 @@ function mail(options) {
 
       // empty string is an artefact of code format
       owner = '' === owner ? null : owner
-      
+
       // TODO: how to make this action specific?
       var res = await root.post('sys:mail,hook:render', {
         code,
@@ -86,15 +91,14 @@ function mail(options) {
         content
       })
 
-
-      if(null == res) {
+      if (null == res) {
         return null
       }
 
-      if(false === res.ok) {
-        throw new Error('mail-render-failed: '+(res ? res.why : 'unknown'))
+      if (false === res.ok) {
+        throw new Error('mail-render-failed: ' + (res ? res.why : 'unknown'))
       }
-      
+
       var out = res[part]
 
       if ('html' === part) {
@@ -116,10 +120,12 @@ function mail(options) {
       template = template + '~' + msg.owner
     }
     if (null != msg.orbit) {
-      template = template +
+      template =
+        template +
         // NOTE: empty owner may be needed
-        (null != msg.owner ? '' : '~' ) +
-        '~' + msg.orbit
+        (null != msg.owner ? '' : '~') +
+        '~' +
+        msg.orbit
     }
 
     var mail_opts = {
@@ -135,24 +141,27 @@ function mail(options) {
     var sent = await mailer.send(mail_opts)
 
     var savehist =
-        (options.history && false !== msg.history) ||
-        (!options.history && true === msg.history)
+      (options.history && false !== msg.history) ||
+      (!options.history && true === msg.history)
 
     var when = Date.now()
-    
-    if(savehist) {
+
+    if (savehist) {
       // do not wait
-      seneca.entity('sys/mailhist').data$({
-        ...msg,
-        template,
-        when,
-        sent,
-        mid: sent.messageId,
-        ...options.makehist({msg, meta, template, sent, when})
-      }).save$()
+      seneca
+        .entity('sys/mailhist')
+        .data$({
+          ...msg,
+          template,
+          when,
+          sent,
+          mid: sent.messageId,
+          ...options.makehist({ msg, meta, template, sent, when })
+        })
+        .save$()
     }
 
-    if(options.logmail) {
+    if (options.logmail) {
       seneca.log.info({
         notice: 'email-sent',
         data: {
@@ -163,7 +172,7 @@ function mail(options) {
         }
       })
     }
-    
+
     return {
       msg,
       sent,
