@@ -72,7 +72,6 @@ lab.test('owner-orbit', async () => {
   expect(res.template).equals('foo~o01~zed')
   expect(res.sent.message).includes('Owner01 FOO')
 
-  
   res = await si.post('sys:mail,send:mail', {
     code: 'foo',
     owner: 'o02',
