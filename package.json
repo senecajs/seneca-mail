@@ -1,10 +1,11 @@
 {
   "name": "@seneca/mail",
-  "version": "2.3.0",
+  "version": "2.3.1",
   "description": "Seneca email plugin",
   "main": "mail.js",
   "scripts": {
     "test": "lab -v -L -P test -t 80 -I __core-js_shared__ -r console -o stdout -r html -o test/coverage.html",
+    "build": "echo null-build",
     "doc": "seneca-doc",
     "prettier": "prettier --write *.js lib/*.js bin/*.js test/*.js",
     "coveralls": "lab -s -P test -r lcov | coveralls",
@@ -14,7 +15,7 @@
     "reset": "npm run clean && npm i && npm test",
     "repo-check": "REPO_VERSION=`node -e \"console.log(require('./package').version)\"` && echo TAG: v$REPO_VERSION && [[ '' == `git tag --list v${REPO_VERSION}` ]]",
     "repo-tag": "REPO_VERSION=`node -e \"console.log(require('./package').version)\"` && echo TAG: v$REPO_VERSION && git commit -a -m v$REPO_VERSION && git push && git tag v$REPO_VERSION && git push --tags;",
-    "repo-publish": "npm run repo-check && npm run clean && npm i --registry http://registry.npmjs.org && npm run prettier && npm test && npm run repo-tag && npm publish --registry http://registry.npmjs.org",
+    "repo-publish": "npm run repo-check && npm run clean && npm i --registry http://registry.npmjs.org && npm run repo-publish-quick",
     "repo-publish-quick": "npm run repo-check && npm run prettier && npm run build && npm test && npm run doc && npm run repo-tag && npm publish --registry http://registry.npmjs.org"
   },
   "keywords": [

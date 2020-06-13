@@ -144,17 +144,23 @@ function mail(options) {
     }
 
     var sent = await mailer.send(mail_opts)
-    var statusCode = sent ? sent.statusCode ? sent.statusCode :
-        sent[0] ? sent[0].statusCode :
-        0 : 0
+    var statusCode = sent
+      ? sent.statusCode
+        ? sent.statusCode
+        : sent[0]
+        ? sent[0].statusCode
+        : 0
+      : 0
 
     var result =
-        sent && 'function' === typeof sent.toJSON ? sent.toJSON() :
-        sent[0] && 'function' === typeof sent[0].toJSON ? sent[0].toJSON() : 
-        {
-          messageId: messageId,
-          statusCode: statusCode
-        }
+      sent && 'function' === typeof sent.toJSON
+        ? sent.toJSON()
+        : sent[0] && 'function' === typeof sent[0].toJSON
+        ? sent[0].toJSON()
+        : {
+            messageId: messageId,
+            statusCode: statusCode
+          }
 
     var savehist =
       (options.history && false !== msg.history) ||
