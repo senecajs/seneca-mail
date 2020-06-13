@@ -203,16 +203,17 @@ function mail(options) {
       // NOTE: avoid sending internal objects back (sendgrid issue)
       sent: Array.isArray(sent)
         ? {
-            message: sent[2]
-              ? sent[2].originalMessage.html
-                ? sent[2].originalMessage.html
+            message:
+              sent.originalMessage && sent.originalMessage.html
+                ? sent.originalMessage.html
                 : ''
-              : ''
           }
         : sent,
 
       result,
-      template
+      template,
+      mid: messageId,
+      status: statusCode
     }
   }
 

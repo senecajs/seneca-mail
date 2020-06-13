@@ -1,6 +1,6 @@
 {
   "name": "@seneca/mail",
-  "version": "2.3.1",
+  "version": "2.3.2",
   "description": "Seneca email plugin",
   "main": "mail.js",
   "scripts": {
