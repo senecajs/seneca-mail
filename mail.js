@@ -144,6 +144,17 @@ function mail(options) {
     }
 
     var sent = await mailer.send(mail_opts)
+
+    // NOTE: avoid sending internal objects back (sendgrid issue)
+    var sentdesc = Array.isArray(sent)
+      ? {
+          message:
+            sent.originalMessage && sent.originalMessage.html
+              ? sent.originalMessage.html
+              : ''
+        }
+      : sent
+
     var statusCode = sent
       ? sent.statusCode
         ? sent.statusCode
@@ -178,6 +189,7 @@ function mail(options) {
           when,
           mid: messageId,
           status: statusCode,
+          sent: sentdesc,
           result,
           ...options.makehist({ msg, meta, template, sent, result, when })
         })
@@ -199,17 +211,7 @@ function mail(options) {
 
     return {
       msg,
-
-      // NOTE: avoid sending internal objects back (sendgrid issue)
-      sent: Array.isArray(sent)
-        ? {
-            message:
-              sent.originalMessage && sent.originalMessage.html
-                ? sent.originalMessage.html
-                : ''
-          }
-        : sent,
-
+      sent: sentdesc,
       result,
       template,
       mid: messageId,
