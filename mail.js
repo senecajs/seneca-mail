@@ -118,7 +118,6 @@ function mail(options) {
     var content = msg.content // content to merge
     var merge = msg.merge || {} // merge rules
 
-    
     // Template format is code~owner~orbit
     var template = msg.code
     if (null != msg.owner) {
