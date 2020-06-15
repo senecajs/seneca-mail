@@ -89,7 +89,8 @@ function mail(options) {
         owner,
         orbit,
         part,
-        content
+        content,
+        merge: content.__merge__
       })
 
       if (null == res) {
@@ -113,8 +114,11 @@ function mail(options) {
   })
 
   async function send_mail(msg, meta) {
-    var content = msg.content
+    // NOTE: rendering and merging are performed by implementing hook:render yourself
+    var content = msg.content // content to merge
+    var merge = msg.merge || {} // merge rules
 
+    
     // Template format is code~owner~orbit
     var template = msg.code
     if (null != msg.owner) {
@@ -132,6 +136,11 @@ function mail(options) {
     // TODO: support domain suffix?
     var messageId = Uuid.v4()
 
+    var locals = {
+      ...content,
+      __merge__: merge
+    }
+
     var mail_opts = {
       template,
       message: {
@@ -140,7 +149,7 @@ function mail(options) {
         subject: msg.subject,
         messageId
       },
-      locals: content
+      locals
     }
 
     var sent = await mailer.send(mail_opts)
