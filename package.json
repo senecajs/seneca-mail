@@ -28,7 +28,7 @@
   "license": "MIT",
   "dependencies": {
     "email-templates": "~7.0.5",
-    "nodemailer": "~6.4.8",
+    "nodemailer": "~6.6.1",
     "nodemailer-smtp-transport": "~2.7.4",
     "nodemailer-stub-transport": "~1.1.0"
   },
