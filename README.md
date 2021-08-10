@@ -10,7 +10,8 @@ Send emails with templates.
 [![DeepScan grade](https://deepscan.io/api/teams/5016/projects/12281/branches/187929/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=5016&pid=12281&bid=187929)
 [![dependencies Status](https://david-dm.org/senecajs/seneca-mail/status.svg)](https://david-dm.org/senecajs/seneca-mail)
 
-
+| ![Voxgig](https://www.voxgig.com/res/img/vgt01r.png) | This open source module is sponsored and supported by [Voxgig](https://www.voxgig.com). |
+|---|---|
 
 Updated plugin - WORK IN PROGRESS
 
