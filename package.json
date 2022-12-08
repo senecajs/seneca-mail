@@ -28,19 +28,19 @@
   "license": "MIT",
   "dependencies": {
     "email-templates": "~7.0.5",
-    "nodemailer": "~6.4.8",
+    "nodemailer": "~6.8.0",
     "nodemailer-smtp-transport": "~2.7.4",
     "nodemailer-stub-transport": "~1.1.0"
   },
   "devDependencies": {
     "@hapi/code": "^8.0.1",
     "@hapi/lab": "^22.0.4",
-    "@seneca/doc": "^4.0.0",
+    "@seneca/doc": "^4.1.0",
     "nodemailer-sendgrid": "^1.0.3",
     "seneca": "plugin",
-    "seneca-entity": "^9.0.1",
+    "seneca-entity": "^18.4.0",
     "seneca-plugin-validator": "^0.6.1",
-    "seneca-promisify": "^1.4.0"
+    "seneca-promisify": "^3.4.0"
   },
   "files": [
     "README.md",
