@@ -18,6 +18,11 @@
     "repo-publish": "npm run repo-check && npm run clean && npm i --registry http://registry.npmjs.org && npm run repo-publish-quick",
     "repo-publish-quick": "npm run repo-check && npm run prettier && npm run build && npm test && npm run doc && npm run repo-tag && npm publish --registry http://registry.npmjs.org"
   },
+  "homepage": "https://github.com/senecajs/seneca-mail#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/senecajs/seneca-mail.git"
+  },
   "keywords": [
     "seneca",
     "mail",
