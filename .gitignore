@@ -21,3 +21,4 @@ test/sendconf.mine.js
 test/mine.js
 
 .idea/
+package-lock.json
