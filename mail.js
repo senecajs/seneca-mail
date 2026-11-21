@@ -1,51 +1,36 @@
 /* Copyright (c) 2013-2020 Richard Rodger and other contributors, MIT License */
 'use strict'
 
-const Uuid = require('uuid')
+const Crypto = require('node:crypto')
 const Email = require('email-templates')
 
 module.exports = mail
-module.exports.defaults = ({ Joi }) => ({
-  test: Joi.boolean()
-    .default(false)
-    .description('Test mode.'),
+module.exports.defaults = ({ valid }) => ({
+  // Test mode.
+  test: false,
 
-  history: Joi.boolean()
-    .default(true)
-    .description('Save mail history to `sys/mailhist` entity.'),
+  // Save mail history to `sys/mailhist` entity.
+  history: true,
 
-  // NOTE: Joi function default must be returned from a default maker function
-  makehist: Joi.function()
-    .default(() => () => {})
-    .description('Add properties to `sys/mailhist` entity.'),
+  // Add properties to `sys/mailhist` entity.
+  makehist: function makehist() {},
 
-  logmail: Joi.boolean()
-    .default(true)
-    .description('Log mail sending at info level.'),
+  // Log mail sending at info level.
+  logmail: true,
 
-  // options for nodemailer
-  email: Joi.object({
+  // Options for nodemailer (email-templates); other keys are passed through.
+  email: valid.Open({
     // NOTE: for safety the default is to not send email
+    send: false,
 
-    send: Joi.boolean()
-      .default(false)
-      .description('Send email (for safety, off by default).'),
-
-    preview: Joi.boolean()
-      .default(false)
-      .description('Preview email.')
+    // Preview email.
+    preview: false
   })
-    .unknown()
-    .default()
-    .description('Options for nodemailer.')
 })
 
 function mail(options) {
   var seneca = this
   var mailer
-
-  // TODO seneca 4.x with embedded promisify should support this
-  seneca.depends('promisify')
 
   seneca
     .message('sys:mail,send:mail', send_mail)
@@ -133,7 +118,7 @@ function mail(options) {
     }
 
     // TODO: support domain suffix?
-    var messageId = Uuid.v4()
+    var messageId = Crypto.randomUUID()
 
     var locals = {
       ...content,

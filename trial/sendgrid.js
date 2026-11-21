@@ -1,11 +1,11 @@
 
-var Seneca = require('Seneca')
+var Seneca = require('seneca')
 
 run()
 
 async function run() {
-  var si = await Seneca({ logger:'flat', log: 'debug', legacy: { transport: false } })
-      .use('promisify')
+  var si = await Seneca({ logger:'flat', log: 'debug' })
+      .use('@seneca/entity')
       .use('..', {
         email: {
           send: false,

@@ -1,20 +1,16 @@
 /* Copyright (c) 2019 voxgig and other contributors, MIT License */
 'use strict'
 
-// const Util = require('util')
-
-const Lab = require('@hapi/lab')
-const Code = require('@hapi/code')
-const lab = (exports.lab = Lab.script())
-const expect = Code.expect
+const { test } = require('node:test')
+const assert = require('node:assert/strict')
 
 const PluginValidator = require('seneca-plugin-validator')
 const Seneca = require('seneca')
 const Plugin = require('..')
 
-lab.test('validate', PluginValidator(Plugin, module))
+test('validate', PluginValidator(Plugin, module))
 
-lab.test('happy', async () => {
+test('happy', async () => {
   var si = await seneca_instance().ready()
   var address = 'alice@example.com'
   var res
@@ -27,8 +23,8 @@ lab.test('happy', async () => {
     }
   })
 
-  expect(res.msg.code).equals('foo')
-  expect(res.sent.message).includes('BarraB')
+  assert.equal(res.msg.code, 'foo')
+  assert.ok(res.sent.message.includes('BarraB'))
 
   si.message('sys:mail,hook:render,code:foo', async function(msg) {
     return { html: `Foo ${msg.content.bar} ooF` }
@@ -42,10 +38,12 @@ lab.test('happy', async () => {
     }
   })
 
-  expect(res.sent.message).includes('Foo BarraB ooF')
+  assert.ok(res.sent.message.includes('Foo BarraB ooF'))
+
+  await si.close()
 })
 
-lab.test('owner-orbit', async () => {
+test('owner-orbit', async () => {
   var si = await seneca_instance(
     { legacy: false },
     {
@@ -72,11 +70,11 @@ lab.test('owner-orbit', async () => {
     }
   })
 
-  expect(res.msg.code).equals('foo')
-  expect(res.msg.owner).equals('o01')
-  expect(res.msg.orbit).equals('zed')
-  expect(res.template).equals('foo~o01~zed')
-  expect(res.sent.message).includes('Owner01 FOO')
+  assert.equal(res.msg.code, 'foo')
+  assert.equal(res.msg.owner, 'o01')
+  assert.equal(res.msg.orbit, 'zed')
+  assert.equal(res.template, 'foo~o01~zed')
+  assert.ok(res.sent.message.includes('Owner01 FOO'))
 
   res = await si.post('sys:mail,send:mail', {
     code: 'foo',
@@ -87,17 +85,87 @@ lab.test('owner-orbit', async () => {
     }
   })
 
-  expect(res.msg.code).equals('foo')
-  expect(res.msg.owner).equals('o02')
-  expect(res.msg.orbit).not.exists()
-  expect(res.template).equals('foo~o02')
-  expect(res.sent.message).includes('Owner02 FOO')
+  assert.equal(res.msg.code, 'foo')
+  assert.equal(res.msg.owner, 'o02')
+  assert.ok(null == res.msg.orbit)
+  assert.equal(res.template, 'foo~o02')
+  assert.ok(res.sent.message.includes('Owner02 FOO'))
+
+  await si.close()
+})
+
+test('history', async () => {
+  var si = await seneca_instance(
+    {},
+    {
+      logmail: false,
+      makehist: ({ template, msg }) => ({ tmpl: template, who: msg.to })
+    }
+  ).ready()
+
+  var res = await si.post('sys:mail,send:mail', {
+    code: 'foo',
+    to: 'carol@example.com',
+    content: { bar: 'BarraB' }
+  })
+
+  // The history entity is saved without waiting.
+  var list = []
+  for (var i = 0; i < 50 && 0 === list.length; i++) {
+    await new Promise(r => setTimeout(r, 20))
+    list = await si.entity('sys/mailhist').list$()
+  }
+
+  assert.equal(list.length, 1)
+  assert.equal(list[0].mid, res.mid)
+  assert.equal(list[0].template, 'foo')
+  assert.equal(list[0].tmpl, 'foo')
+  assert.equal(list[0].who, 'carol@example.com')
+
+  // history:false on the message skips the entity.
+  await si.post('sys:mail,send:mail', {
+    code: 'foo',
+    to: 'dave@example.com',
+    history: false,
+    content: { bar: 'BarraB' }
+  })
+  await new Promise(r => setTimeout(r, 50))
+  list = await si.entity('sys/mailhist').list$()
+  assert.equal(list.length, 1)
+
+  await si.close()
+})
+
+test('email-options-pass-through', async () => {
+  // Options for nodemailer and email-templates other than send and
+  // preview are passed through, such as the default message fields.
+  var si = await seneca_instance(
+    {},
+    {
+      history: false,
+      logmail: false,
+      email: {
+        message: { from: 'sender@example.com' }
+      }
+    }
+  ).ready()
+
+  var res = await si.post('sys:mail,send:mail', {
+    code: 'foo',
+    to: 'erin@example.com',
+    content: { bar: 'BarraB' }
+  })
+
+  assert.equal(res.sent.envelope.from, 'sender@example.com')
+  assert.deepEqual(res.sent.envelope.to, ['erin@example.com'])
+  assert.ok(res.sent.message.includes('BarraB'))
+
+  await si.close()
 })
 
 function seneca_instance(seneca_options, plugin_options) {
-  return Seneca(seneca_options, { legacy: { transport: false } })
+  return Seneca(seneca_options)
     .test()
-    .use('promisify')
-    .use('entity')
+    .use('@seneca/entity')
     .use(Plugin, plugin_options)
 }
