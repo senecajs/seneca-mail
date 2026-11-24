@@ -12,14 +12,22 @@
 ## Install
 
 ```
-npm install @seneca/mail
+npm install seneca@^4 @seneca/entity @seneca/mail
 ```
+
+Requires Node.js 24 or later and Seneca 4. The mail history (option
+`history`, on by default) is saved as `sys/mailhist` entities, so it needs
+`@seneca/entity` 29 or later and a store. `@seneca/entity` loads its
+in-memory store by default.
+
 ## Quick Example
 
 ```
-seneca.use('mail', {
-  email: { send: true }
-})
+seneca
+  .use('@seneca/entity')
+  .use('@seneca/mail', {
+    email: { send: true }
+  })
 ```
 ## More Examples
 
@@ -64,6 +72,12 @@ seneca.use('mail', { name: value, ... })
 <code>{ foo: { bar: ... } }</code></small> 
 
 <!--END:options-->
+
+Other `email` options are passed to
+[email-templates](https://github.com/forwardemail/email-templates) and
+nodemailer, for example `email.message` for default message fields, or
+`email.transport` as `{ name, options }`, which loads the transport
+package `nodemailer-<name>`.
 
 <!--START:action-list-->
 

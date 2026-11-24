@@ -1,14 +1,13 @@
 {
   "name": "@seneca/mail",
-  "version": "2.4.0",
+  "version": "3.0.0",
   "description": "Seneca email plugin",
   "main": "mail.js",
   "scripts": {
-    "test": "lab -v -L -P test -t 80 -I __core-js_shared__ -r console -o stdout -r html -o test/coverage.html",
+    "test": "node --test --experimental-test-coverage --test-coverage-include=mail.js --test-coverage-exclude=\"test/**\" --test-coverage-lines=80 \"test/*.test.js\"",
     "build": "echo null-build",
     "doc": "seneca-doc",
     "prettier": "prettier --write *.js lib/*.js bin/*.js test/*.js",
-    "coveralls": "lab -s -P test -r lcov | coveralls",
     "clean-npm": "rm -rf node_modules package-lock.json",
     "clean-yarn": "rm -rf node_modules yarn.lock",
     "clean": "rm -rf node_modules yarn.lock package-lock.json",
@@ -38,18 +37,31 @@
     "nodemailer-stub-transport": "~1.1.0"
   },
   "devDependencies": {
-    "@hapi/code": "^8.0.1",
-    "@hapi/lab": "^22.0.4",
-    "@seneca/doc": "^4.1.0",
+    "@seneca/doc": "^9.0.0",
+    "@seneca/entity": "^29.0.0",
     "nodemailer-sendgrid": "^1.0.3",
-    "seneca": "plugin",
-    "seneca-entity": "^18.4.0",
-    "seneca-plugin-validator": "^0.6.1",
-    "seneca-promisify": "^3.4.0"
+    "seneca": "^4.0.0",
+    "seneca-plugin-validator": "^0.7.0"
   },
   "files": [
     "README.md",
     "LICENSE.txt",
+    "CHANGES.md",
     "mail.js"
-  ]
+  ],
+  "peerDependencies": {
+    "@seneca/entity": "^29.0.0",
+    "seneca": "^4.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@seneca/entity": {
+      "optional": true
+    }
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
 }
